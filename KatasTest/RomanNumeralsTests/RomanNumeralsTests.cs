@@ -58,7 +58,7 @@ namespace KatasTest.RomanNumeralsTests
 		public void AssembleRoman()
 		{
 			// arrange
-			var mi = typeof(RomanNumerals).GetMethod("AssempleRoman", BindingFlags.NonPublic | BindingFlags.Static);
+			var mi = typeof(RomanNumerals).GetMethod("Assemple_roman", BindingFlags.NonPublic | BindingFlags.Static);
 			var sut = new RomanNumerals();
 
 			// act

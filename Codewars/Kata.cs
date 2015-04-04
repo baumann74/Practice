@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Codewars
 {
+	using System;
+	using System.Collections.Generic;
+
 	public class Kata
 	{
 		// http://www.codewars.com/kata/5299413901337c637e000004/train/csharp
@@ -52,6 +55,61 @@ namespace Codewars
 			return goodCount > badCount 
 				? "Battle Result: Good triumphs over Evil" 
 				: "Battle Result: Evil eradicates all trace of Good";
+		}
+
+		// http://www.codewars.com/kata/55003f75bae8cd78d200127b/train/csharp
+
+		public static bool IsPalindrome(string w)
+		{
+			var list = w.Trim().Where(Char.IsLetterOrDigit).Select(Char.ToLower).ToArray();
+			return list.Reverse().SequenceEqual(list);
+		}
+
+		// http://www.codewars.com/kata/palindrome-chain-length/train/csharp
+
+		public static int PalindromeChainLength(long n)
+		{
+			// Cool solution.
+//			var r = long.Parse(n.ToString().Reverse().Aggregate("", (s, c) => s + c));
+//			return (n == r) ? 0 : (1 + PalindromeChainLength(r + n));
+			return CalculateChain(n, 0, Split_into_digits, Reverse_digits_to_number);
+		}
+
+		private static int CalculateChain(
+			long n, 
+			int count, 
+			Func<long, IList<long>> splitToDigits, 
+			Func<IEnumerable<long>, long> reverseDigits)
+		{
+			var digits = Split_into_digits(n);
+			if (digits.Reverse().SequenceEqual(digits))
+			{
+				return count;
+			}
+			var nextStep = n + reverseDigits(digits);
+			return CalculateChain(nextStep, count + 1, splitToDigits, reverseDigits);
+		}
+
+		private static long Reverse_digits_to_number(IEnumerable<long> digits)
+		{
+			var result = 0l;
+			var reversedDigits = digits.Reverse().ToList();
+			for (var i = 0; i < reversedDigits.Count(); i++)
+			{
+				result = result + reversedDigits[i] * (long)Math.Pow(10, i);
+			}
+			return result;
+		}
+
+		private static IList<long> Split_into_digits(long n)
+		{
+			var result = new List<long>();
+			while (n > 0)
+			{
+				result.Add(n % 10);
+				n = n / 10;
+			}
+			return result;
 		}
 	}
 }

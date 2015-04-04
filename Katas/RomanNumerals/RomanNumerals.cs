@@ -20,7 +20,7 @@ namespace Katas.RomanNumerals
 		{
 			var factors = Split_into_factors(arabic);
 			var romanNumeralsList = Convert_factors_to_roman(factors);
-			return AssempleRoman(romanNumeralsList);
+			return Assemple_roman(romanNumeralsList);
 		}
 
 		private static IEnumerable<int> Split_into_factors(int arabic)
@@ -46,7 +46,7 @@ namespace Katas.RomanNumerals
 			return result;
 		}
 
-		private static string AssempleRoman(IEnumerable<string> romanNumeralsList)
+		private static string Assemple_roman(IEnumerable<string> romanNumeralsList)
 		{
 			return String.Join("", romanNumeralsList.Reverse());
 		}

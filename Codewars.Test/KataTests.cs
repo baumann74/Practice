@@ -5,17 +5,16 @@ namespace Codewars.Test
 	[TestFixture]
 	public class KataTests
 	{
-
 		[Test]
 		public void GetMissingElement_EightIsMissing()
 		{
-			Assert.AreEqual(8, Kata.GetMissingElement(new int[9] { 0, 5, 1, 3, 2, 9, 7, 6, 4 }));
+			Assert.AreEqual(8, Kata.GetMissingElement(new int[9] {0, 5, 1, 3, 2, 9, 7, 6, 4}));
 		}
 
 		[Test]
 		public void GetMissingElement_ThreeIsMissing()
 		{
-			Assert.AreEqual(3, Kata.GetMissingElement(new int[9] { 9, 2, 4, 5, 7, 0, 8, 6, 1 }));
+			Assert.AreEqual(3, Kata.GetMissingElement(new int[9] {9, 2, 4, 5, 7, 0, 8, 6, 1}));
 		}
 
 		[Test]
@@ -44,6 +43,58 @@ namespace Codewars.Test
 			{
 				Assert.AreEqual("Battle Result: No victor on this battle field", Kata.GoodVsEvil("1 0 0 0 0 0", "1 0 0 0 0 0 0"));
 			}
+		}
+
+		[TestFixture]
+		public class PalinDromeTest
+		{
+			[Test]
+			public void GivenAValidPalindromeOutputShouldBeTrue()
+			{
+				Assert.AreEqual(true, Kata.IsPalindrome("aha"));
+			}
+
+			[Test]
+			public void GivenAValidPalindromeWithCaseOutputShouldBeTrue()
+			{
+				Assert.AreEqual(true, Kata.IsPalindrome("ahA"));
+			}
+
+			[Test]
+			public void GivenAInvalidPalindromeOutputShouldBeFalse()
+			{
+				Assert.AreEqual(false, Kata.IsPalindrome("hello"));
+			}
+
+			[Test]
+			public void GivenAValidPalindromeWithSpecialCharactersOutputShouldBeTrue()
+			{
+				Assert.AreEqual(true, Kata.IsPalindrome("a ha ./?!@#$%^&*(){}[];'\\|<>,"));
+			}
+
+			[Test]
+			public void GivenAInvlidPalindromeWithSpecialCharactersOutputShouldBeFalse()
+			{
+				Assert.AreEqual(false, Kata.IsPalindrome("Hello ./?!@#$%^&*(){}[];'\\|<>,"));
+			}
+		}
+
+		[TestFixture]
+		public class PalinddromeChainLengthTest
+		{
+
+			[Test]
+			public void Given87OutputShouldBe4()
+			{
+				Assert.AreEqual(4, Kata.PalindromeChainLength(87));
+			}
+
+			[Test]
+			public void Given89OutputShouldBe24()
+			{
+				Assert.AreEqual(24, Kata.PalindromeChainLength(89));
+			}
+			
 		}
 	}
 }
