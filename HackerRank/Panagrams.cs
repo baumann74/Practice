@@ -1,17 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace HackerRank
 {
-	using System.Collections.Generic;
+	using System;
 	using System.Linq;
 
-	class Solution
+	public class Panagrams
 	{
-		static void Main(String[] args)
-		{
-			var t = Console.ReadLine();
-			Console.WriteLine(IsPanagram(t) ? "panagram" : "not panagram");
-		}
 
 		public static bool IsPanagram(string s)
 		{

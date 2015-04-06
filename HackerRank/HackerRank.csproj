@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Panagrams.cs" />
     <Compile Include="Solution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadFromInputTemplate.cs" />
+    <Compile Include="TaumAndBday.cs" />
     <Compile Include="UtopianTree.cs" />
   </ItemGroup>
   <ItemGroup>
