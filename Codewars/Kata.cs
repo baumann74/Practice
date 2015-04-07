@@ -111,5 +111,12 @@ namespace Codewars
 			}
 			return result;
 		}
+
+		public static int Factorial(int n)
+		{
+			if (n < 0 || n > 16) throw new ArgumentOutOfRangeException();
+			return n == 0 ? 1 : Enumerable.Range(1, n).Aggregate(1, (a, c) => a * c);
+//			return x == 0 ? 1 : x * Factorial(x - 1);
+		}
 	}
 }
