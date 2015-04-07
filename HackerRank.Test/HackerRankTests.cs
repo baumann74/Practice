@@ -32,5 +32,20 @@ namespace HackerRank.Test
 		{
 			HackerRank.Panagrams.IsPanagram(s).Should().Be(result);
 		}
+
+		[TestCase("ab", "ba")]
+		[TestCase("bb", "no answer")]
+		[TestCase("hefg", "hegf")]
+		[TestCase("zedawdvyyfumwpupuinbdbfndyehircmylbaowuptgmw", "zedawdvyyfumwpupuinbdbfndyehircmylbaowuptgwm")]
+		[TestCase("ocsmerkgidvddsazqxjbqlrrxcotrnfvtnlutlfcafdlwiismslaytqdbvlmcpapfbmzxmftrkkqvkpflxpezzapllerxyzlcf",
+			"ocsmerkgidvddsazqxjbqlrrxcotrnfvtnlutlfcafdlwiismslaytqdbvlmcpapfbmzxmftrkkqvkpflxpezzapllerxyzlfc")]
+		[TestCase("ehxxdsuhoowxpbxiwxjrhe", "ehxxdsuhoowxpbxiwxrehj")]
+		[TestCase("jrhe", "rehj")]
+		[TestCase("pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzeye", "pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzyee")]
+		[TestCase("eye", "yee")]
+		public void BiggerIsGreater(string s, string result)
+		{
+			HackerRank.BiggerIsGreater.Solution(s).Should().Be(result);
+		}
 	}
 }
