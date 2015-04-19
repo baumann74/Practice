@@ -118,5 +118,14 @@ namespace Codewars
 			return n == 0 ? 1 : Enumerable.Range(1, n).Aggregate(1, (a, c) => a * c);
 //			return x == 0 ? 1 : x * Factorial(x - 1);
 		}
+
+		public static int IqTest(string numbers)
+		{
+			return numbers.Split(' ')
+				.Select((s, i) => new {s, i})
+				.Where(y => int.Parse(y.s) % 2 == 1)
+				.Select(t => t.i + 1)
+				.Single();
+		}
 	}
 }

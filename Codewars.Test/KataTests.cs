@@ -123,5 +123,20 @@ namespace Codewars.Test
 				Assert.AreEqual(6, Kata.Factorial(3));
 			}
 		}
+
+		public class IQTests
+		{
+			[Test]
+			public void Test1()
+			{
+				Assert.AreEqual(3, Kata.IqTest("2 4 7 8 10"));
+			}
+
+			[Test]
+			public void Test2()
+			{
+				Assert.AreEqual(1, Kata.IqTest("1 2 2"));
+			}
+		}
 	}
 }

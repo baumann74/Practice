@@ -49,15 +49,15 @@ namespace HackerRank.Test
 			HackerRank.BiggerIsGreater.Solution(s).Should().Be(result);
 		}
 
-		[TestCase(2, new[] { "Move T1 T2", "Move T1 T3", "Move T2 T3" })]
+		[TestCase(2, new[] { "MOVE T1 T2", "MOVE T1 T3", "MOVE T2 T3" })]
 		[TestCase(3, new[] {       
-			"Move T1 T3",
-			"Move T1 T2",
-			"Move T3 T2",
-			"Move T1 T3",
-			"Move T2 T1",
-			"Move T2 T3",
-			"Move T1 T3"
+			"MOVE T1 T3",
+			"MOVE T1 T2",
+			"MOVE T3 T2",
+			"MOVE T1 T3",
+			"MOVE T2 T1",
+			"MOVE T2 T3",
+			"MOVE T1 T3"
 		})]
 		public void TowerOfHanoi(int n, string[] result)
 		{
