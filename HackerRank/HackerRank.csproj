@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiggerIsGreater.cs" />
+    <Compile Include="CoinChangeProblem.cs" />
     <Compile Include="Panagrams.cs" />
     <Compile Include="Solution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

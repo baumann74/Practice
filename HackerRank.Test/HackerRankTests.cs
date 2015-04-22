@@ -63,5 +63,13 @@ namespace HackerRank.Test
 		{
 			TowersOfHanoi.FindMoves(n).Should().BeEquivalentTo(result);
 		}
+
+
+		[TestCase(4, new[] {1, 2, 3}, 4)]
+		[TestCase(10, new[] {2, 5, 3,6}, 5)]
+		public void CoinChangeProblem(int n, int[] coins, int result)
+		{
+			HackerRank.CoinChangeProblem.Solve(n, coins).Should().Be(result);
+		}
 	}
 }
