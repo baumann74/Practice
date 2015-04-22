@@ -3,35 +3,56 @@
 namespace HackerRank
 {
 	using System.Collections.Generic;
+	using System.Linq;
 
 	class Solution
 	{
 		static void Main(String[] args)
 		{
-			var t = int.Parse(Console.ReadLine());
-			foreach (var move in FindMoves(t))
+			var splitElements = Console.ReadLine().Split(' ');
+			var n = int.Parse(splitElements[0]);
+			var m = int.Parse(splitElements[1]);
+			var coins = Console.ReadLine().Split(' ');
+			var list = new List<int>();
+			for (var i = 0; i < m; i++)
 			{
-				Console.WriteLine(move);
+				list.Add(int.Parse(coins[i]));
 			}
+			Console.WriteLine(Solve(n, list.ToArray()));
 		}
 
-		public static IEnumerable<string> FindMoves(int n)
+		public static int Solve(int n, int[] coins)
 		{
-			var result = new List<string>();
-			FindMoves(n, 1, 3, 2, result);
+			cache.Clear();
+			return Calculate(n, coins, new List<int>(), 0, CreateCacheString);
+		}
+
+		private static readonly HashSet<string> cache = new HashSet<string>();
+
+		private static int Calculate(int n, int[] coinsAvailable, IList<int> coinsUsed, int sum, Func<IList<int>, string> toCacheKey)
+		{
+			if (cache.Contains(toCacheKey(coinsUsed))) return 0;
+			if (n == sum) return 1;
+			if (sum > n) return 0;
+			var result = 0;
+			foreach (var coin in coinsAvailable)
+			{
+				var newCoinsUsed = new List<int>();
+				newCoinsUsed.AddRange(coinsUsed);
+				newCoinsUsed.Add(coin);
+				var cacheKey = toCacheKey(newCoinsUsed);
+				result += Calculate(n, coinsAvailable, newCoinsUsed, sum + coin, toCacheKey);
+				if (!cache.Contains(cacheKey))
+				{
+					cache.Add(cacheKey);
+				}
+			}
 			return result;
 		}
 
-		public static void FindMoves(int n, int from, int to, int temp, List<string> result)
+		private static string CreateCacheString(IList<int> list)
 		{
-			if (n == 1)
-			{
-				result.Add(string.Format("Move T{0} T{1}", from, to));
-				return;
-			}
-			FindMoves(n - 1, from, temp, to, result);
-			result.Add(string.Format("Move T{0} T{1}", from, to));
-			FindMoves(n - 1, temp, to, from, result);
+			return list.OrderBy(x => x).Aggregate("", (s, c) => s + c);
 		}
 	}
 }

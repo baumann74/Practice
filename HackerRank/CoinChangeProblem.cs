@@ -2,57 +2,57 @@
 
 namespace HackerRank
 {
-	using System.Diagnostics;
+	using System;
 	using System.Linq;
 
 	public class CoinChangeProblem
 	{
 
-		public static int Solve(int n, int[] coins)
+		public static long Solve(int n, int[] coins)
 		{
-			return Calculate(n, coins, new List<int>(), 0);
+			cache.Clear();
+			return Calculate(n, coins, new List<int>(), 0, CreateCacheString);
 		}
 
-		private static readonly Dictionary<string, int> cache = new Dictionary<string, int>();
+		private static readonly HashSet<string> cache = new HashSet<string>();
 
-		private static int Calculate(int n, int[] coinsAvailable, List<int> coinsUsed, int sum)
+		private static long Calculate(int n, int[] coinsAvailable, IList<int> coinsUsed, long sum, Func<IList<int>, string> toCacheKey)
 		{
-			var key = coinsUsed.OrderBy(x => x).Aggregate("", (s, c) => s + c);
-			Debug.WriteLine("Look for: " + key);
-			if (cache.ContainsKey(key))
+			var cacheKey = toCacheKey(coinsUsed);
+//			Debug.WriteLine(cacheKey);
+			if (cache.Contains(toCacheKey(coinsUsed)))
 			{
-				int cachedRes;
-				cache.TryGetValue(key, out cachedRes);
-				Debug.WriteLine("Hit cache: " + key + " " + cachedRes);
+//				Debug.Write("Cache hit: ");
+				coinsUsed.ToList().ForEach(Console.Write);
+//				Debug.WriteLine("");
 				return 0;
 			}
 			if (n == sum)
 			{
-				Debug.Write("****** Found coins:");
-				foreach (var coin in coinsUsed)
-				{
-					Debug.Write(coin);
-				}
-				Debug.WriteLine("\n");
+//				Debug.Write("Correct: ");
+				coinsUsed.ToList().ForEach(Console.Write);
+//				Debug.WriteLine("");
+				cache.Add(cacheKey);
 				return 1;
 			}
 			if (sum > n) return 0;
-			var result = 0;
-			for (var i = 0; i < coinsAvailable.Length; i++)
+			var result = 0L;
+			foreach (var coin in coinsAvailable)
 			{
-				var coin = coinsAvailable[i];
 				var newCoinsUsed = new List<int>();
 				newCoinsUsed.AddRange(coinsUsed);
 				newCoinsUsed.Add(coin);
-				var cacheKey = newCoinsUsed.OrderBy(x => x).Aggregate("", (s, c) => s + c);
-				result += Calculate(n, coinsAvailable, newCoinsUsed, sum + coin);
-				if (!cache.ContainsKey(cacheKey))
-				{
-					Debug.WriteLine("Cache:" + cacheKey);
-					cache.Add(cacheKey, result);
-				}
+				result += Calculate(n, coinsAvailable, newCoinsUsed, sum + coin, toCacheKey);
 			}
+//			Debug.WriteLine("Add to cache: " + cacheKey + " " + result);
+			cache.Add(cacheKey);
+
 			return result;
+		}
+
+		private static string CreateCacheString(IList<int> list)
+		{
+			return list.OrderBy(x => x).Aggregate("", (s, c) => s + c);
 		}
 	}
 }
