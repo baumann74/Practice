@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace HackerRank
 {
-	using System;
 	using System.Linq;
 
 	public class CoinChangeProblem
@@ -10,49 +8,21 @@ namespace HackerRank
 
 		public static long Solve(int n, int[] coins)
 		{
-			cache.Clear();
-			return Calculate(n, coins, new List<int>(), 0, CreateCacheString);
+			cache = new long[n + 1, coins.Length + 1];
+			var sortedCoins = coins.ToList();
+			sortedCoins.Sort();
+			return Calculate(n, coins.Length, sortedCoins.ToArray());
 		}
 
-		private static readonly HashSet<string> cache = new HashSet<string>();
+		private static long[,] cache;
 
-		private static long Calculate(int n, int[] coinsAvailable, IList<int> coinsUsed, long sum, Func<IList<int>, string> toCacheKey)
+		private static long Calculate(int n, int m, int[] coins)
 		{
-			var cacheKey = toCacheKey(coinsUsed);
-//			Debug.WriteLine(cacheKey);
-			if (cache.Contains(toCacheKey(coinsUsed)))
-			{
-//				Debug.Write("Cache hit: ");
-				coinsUsed.ToList().ForEach(Console.Write);
-//				Debug.WriteLine("");
-				return 0;
-			}
-			if (n == sum)
-			{
-//				Debug.Write("Correct: ");
-				coinsUsed.ToList().ForEach(Console.Write);
-//				Debug.WriteLine("");
-				cache.Add(cacheKey);
-				return 1;
-			}
-			if (sum > n) return 0;
-			var result = 0L;
-			foreach (var coin in coinsAvailable)
-			{
-				var newCoinsUsed = new List<int>();
-				newCoinsUsed.AddRange(coinsUsed);
-				newCoinsUsed.Add(coin);
-				result += Calculate(n, coinsAvailable, newCoinsUsed, sum + coin, toCacheKey);
-			}
-//			Debug.WriteLine("Add to cache: " + cacheKey + " " + result);
-			cache.Add(cacheKey);
-
-			return result;
-		}
-
-		private static string CreateCacheString(IList<int> list)
-		{
-			return list.OrderBy(x => x).Aggregate("", (s, c) => s + c);
+			if (n == 0) return 1;
+			if (m == 0 || n < 0) return 0;
+			if (cache[n, m] != 0) return cache[n, m];
+			cache[n,m] = Calculate(n - coins[m - 1], m, coins) + Calculate(n, m - 1, coins);
+			return cache[n, m];
 		}
 	}
 }

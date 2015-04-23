@@ -18,41 +18,26 @@ namespace HackerRank
 			{
 				list.Add(int.Parse(coins[i]));
 			}
-			Console.WriteLine(Solve(n, list.ToArray()));
+			Console.WriteLine(Solve(n, m, list.ToArray()));
 		}
 
-		public static int Solve(int n, int[] coins)
+		public static long Solve(int n, int m, int[] coins)
 		{
-			cache.Clear();
-			return Calculate(n, coins, new List<int>(), 0, CreateCacheString);
+			cache = new long[n + 1, coins.Length + 1];
+			var sortedCoins = coins.ToList();
+			sortedCoins.Sort();
+			return Calculate(n, m, sortedCoins.ToArray());
 		}
 
-		private static readonly HashSet<string> cache = new HashSet<string>();
+		private static long[,] cache;
 
-		private static int Calculate(int n, int[] coinsAvailable, IList<int> coinsUsed, int sum, Func<IList<int>, string> toCacheKey)
+		private static long Calculate(int n, int m, int[] coins)
 		{
-			if (cache.Contains(toCacheKey(coinsUsed))) return 0;
-			if (n == sum) return 1;
-			if (sum > n) return 0;
-			var result = 0;
-			foreach (var coin in coinsAvailable)
-			{
-				var newCoinsUsed = new List<int>();
-				newCoinsUsed.AddRange(coinsUsed);
-				newCoinsUsed.Add(coin);
-				var cacheKey = toCacheKey(newCoinsUsed);
-				result += Calculate(n, coinsAvailable, newCoinsUsed, sum + coin, toCacheKey);
-				if (!cache.Contains(cacheKey))
-				{
-					cache.Add(cacheKey);
-				}
-			}
-			return result;
-		}
-
-		private static string CreateCacheString(IList<int> list)
-		{
-			return list.OrderBy(x => x).Aggregate("", (s, c) => s + c);
+			if (n == 0) return 1;
+			if (m == 0 || n < 0) return 0;
+			if (cache[n, m] != 0) return cache[n, m];
+			cache[n, m] = Calculate(n - coins[m - 1], m, coins) + Calculate(n, m - 1, coins);
+			return cache[n, m];
 		}
 	}
 }

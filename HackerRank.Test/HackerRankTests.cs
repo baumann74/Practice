@@ -68,7 +68,7 @@ namespace HackerRank.Test
 
 		[TestCase(4, new[] {1, 2, 3}, 4)]
 		[TestCase(10, new[] {2, 5, 3,6}, 5)]
-//		[TestCase(166, new[] {5, 37, 8, 39, 33, 17, 22, 32, 13, 7, 10, 35, 40, 2, 43, 49, 46, 19, 41, 1, 12, 11, 28}, 96190959)]
+		[TestCase(166, new[] {5, 37, 8, 39, 33, 17, 22, 32, 13, 7, 10, 35, 40, 2, 43, 49, 46, 19, 41, 1, 12, 11, 28}, 96190959)]
 		public void CoinChangeProblem(int n, int[] coins, long result)
 		{
 			HackerRank.CoinChangeProblem.Solve(n, coins).Should().Be(result);
