@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace HackerRank.Test
 {
-	using System.Diagnostics;
 
 	[TestFixture]
 	public class HackerRankTests
@@ -43,15 +42,17 @@ namespace HackerRank.Test
 			"ocsmerkgidvddsazqxjbqlrrxcotrnfvtnlutlfcafdlwiismslaytqdbvlmcpapfbmzxmftrkkqvkpflxpezzapllerxyzlfc")]
 		[TestCase("ehxxdsuhoowxpbxiwxjrhe", "ehxxdsuhoowxpbxiwxrehj")]
 		[TestCase("jrhe", "rehj")]
-		[TestCase("pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzeye", "pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzyee")]
+		[TestCase("pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzeye",
+			"pqommldkafmnwzidydgjghxcbnwyjdxpvmkztdfmcxlkargafjzyee")]
 		[TestCase("eye", "yee")]
 		public void BiggerIsGreater(string s, string result)
 		{
 			HackerRank.BiggerIsGreater.Solution(s).Should().Be(result);
 		}
 
-		[TestCase(2, new[] { "MOVE T1 T2", "MOVE T1 T3", "MOVE T2 T3" })]
-		[TestCase(3, new[] {       
+		[TestCase(2, new[] {"MOVE T1 T2", "MOVE T1 T3", "MOVE T2 T3"})]
+		[TestCase(3, new[]
+		{
 			"MOVE T1 T3",
 			"MOVE T1 T2",
 			"MOVE T3 T2",
@@ -65,14 +66,20 @@ namespace HackerRank.Test
 			TowersOfHanoi.FindMoves(n).Should().BeEquivalentTo(result);
 		}
 
-
 		[TestCase(4, new[] {1, 2, 3}, 4)]
-		[TestCase(10, new[] {2, 5, 3,6}, 5)]
-		[TestCase(166, new[] {5, 37, 8, 39, 33, 17, 22, 32, 13, 7, 10, 35, 40, 2, 43, 49, 46, 19, 41, 1, 12, 11, 28}, 96190959)]
+		[TestCase(10, new[] {2, 5, 3, 6}, 5)]
+		[TestCase(166, new[] {5, 37, 8, 39, 33, 17, 22, 32, 13, 7, 10, 35, 40, 2, 43, 49, 46, 19, 41, 1, 12, 11, 28}, 96190959
+			)]
 		public void CoinChangeProblem(int n, int[] coins, long result)
 		{
 			HackerRank.CoinChangeProblem.Solve(n, coins).Should().Be(result);
-			Debug.WriteLine("Test");
+		}
+
+//		[TestCase(1, 0)]
+		[TestCase(7, 5)]
+		public void Solution(int input, int result)
+		{
+			HackerRank.RedJohnIsBack.Solution(input).Should().Be(result);
 		}
 	}
 }
