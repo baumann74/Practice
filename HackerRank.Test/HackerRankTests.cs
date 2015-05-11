@@ -110,8 +110,8 @@ namespace HackerRank.Test
 
 		[TestCase(3, new[] {5, 3, 2}, 0L)]
 		[TestCase(3, new[] {1, 2, 100}, 197L)]
-		[TestCase(4, new[] {1, 3, 1, 2 }, 3L)]
-		public void StockMaximize(int n, int[] list, long result)
+		[TestCase(4, new[] {1, 3, 1, 2}, 3L)]
+		public void StockMaximize(long n, int[] list, long result)
 		{
 			HackerRank.StockMaximize.Solve(n, list).Should().Be(result);
 		}
