@@ -95,17 +95,25 @@ namespace HackerRank.Test
 			HackerRank.MaxSubArray.Solve_contiguous(n, list).Should().Be(result);
 		}
 
-//		[TestCase(4, new[] { 1, 2, 3, 4 }, 10)]
-//		[TestCase(6, new[] { 2, -1, 2, 3, 4, -5 }, 11)]
-//		[TestCase(1, new[] { 1 }, 1)]
-//		[TestCase(6, new[] { -1, -2, -3, -4, -5, -6 }, -1)]
-//		[TestCase(2, new[] { 1, -2 }, 1)]
-//		[TestCase(3, new[] { 1, 2, 3 }, 6)]
+		[TestCase(4, new[] { 1, 2, 3, 4 }, 10)]
+		[TestCase(6, new[] { 2, -1, 2, 3, 4, -5 }, 11)]
+		[TestCase(1, new[] { 1 }, 1)]
+		[TestCase(6, new[] { -1, -2, -3, -4, -5, -6 }, -1)]
+		[TestCase(2, new[] { 1, -2 }, 1)]
+		[TestCase(3, new[] { 1, 2, 3 }, 6)]
 		[TestCase(1, new[] { -10 }, -10)]
-//		[TestCase(6, new[] { 1, -1, -1, -1, -1, 5 }, 6)]
+		[TestCase(6, new[] { 1, -1, -1, -1, -1, 5 }, 6)]
 		public void MaxSubArrayNonContigous(int n, int[] list, int result)
 		{
 			HackerRank.MaxSubArray.Solve_non_contigous(n, list).Should().Be(result);
+		}
+
+		[TestCase(3, new[] {5, 3, 2}, 0L)]
+		[TestCase(3, new[] {1, 2, 100}, 197L)]
+		[TestCase(4, new[] {1, 3, 1, 2 }, 3L)]
+		public void StockMaximize(int n, int[] list, long result)
+		{
+			HackerRank.StockMaximize.Solve(n, list).Should().Be(result);
 		}
 	}
 }

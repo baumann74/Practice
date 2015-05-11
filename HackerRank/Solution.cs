@@ -13,37 +13,23 @@ namespace HackerRank
 			{
 				var n = int.Parse(Console.ReadLine());
 				var list = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-				Console.WriteLine(string.Format("{0} {1}", 
-					Solve_contiguous(n, list), 
-					Solve_non_contigous(n, list)));
+				Console.WriteLine(Solve(n, list));
 			}
 		}
 
-		public static int Solve_contiguous(int n, int[] list)
+		public static int Solve(int n, int[] list)
 		{
-			var max_continue = 0;
-			var max_sofar = 0;
-			var allNegative = true;
-
-			for (var i = 0; i < n; i++)
-			{
-				max_continue = max_continue + list[i];
-				if (max_continue < 0)
-				{
-					max_continue = 0; // start over. 
-				}
-				if (max_continue > max_sofar)
-				{
-					max_sofar = max_continue;
-					allNegative = false;
-				}
-			}
-			return allNegative ? list.Max() : max_sofar;
+			return Helper(0, list, 0, 0);
 		}
 
-		public static int Solve_non_contigous(int n, int[] list)
+		private static int Helper(int t, int[] list, int noOfStocks, int accuValue)
 		{
-			return list.All(x => x < 0) ? list.Max() : list.Where(x => x > 0).Sum();
+			if (t == list.Length) return accuValue;
+			var buy = Helper(t + 1, list, noOfStocks + 1, accuValue - list[t]);
+			var sell = Helper(t + 1, list, 0, accuValue + list[t] * noOfStocks);
+			var nothing = Helper(t + 1, list, noOfStocks, accuValue);
+			var options = new[] { buy, sell, nothing };
+			return options.Max();
 		}
 	}
 }
