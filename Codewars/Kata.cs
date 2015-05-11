@@ -150,5 +150,25 @@ namespace Codewars
 				NumberOfStepsHelper(n - 1, m, steps + 1));
 			return cache[n, steps];
 		}
+
+		public static List<int> sqInRect(int lng, int wdth)
+		{
+			if (lng == wdth) return null;
+			var resultList = new List<int>();
+			SqInRectHelper(lng, wdth, resultList);
+			return resultList;
+		}
+
+		public static void SqInRectHelper(int lng, int wdth, List<int> resultList)
+		{
+			if (lng == 0) return;
+			if (wdth > lng)
+			{
+				SqInRectHelper(wdth, lng, resultList);
+				return;
+			}
+			resultList.Add(wdth);
+			SqInRectHelper(lng - wdth, wdth, resultList);
+		}
 	}
 }

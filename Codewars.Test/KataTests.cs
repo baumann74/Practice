@@ -150,9 +150,26 @@ namespace Codewars.Test
 			[Test]
 			public void Test2()
 			{
-//				Assert.AreEqual(-1, Kata.NumberOfSteps(3, 5));
+				Assert.AreEqual(-1, Kata.NumberOfSteps(3, 5));
 			}
 		}
+
+		public class SqInRectTests
+		{
+
+			[Test]
+			public void Test1()
+			{
+				int[] r = new int[] { 3, 2, 1, 1 };
+				Assert.AreEqual(r, Kata.sqInRect(5, 3));
+			}
+			[Test]
+			public void Test3()
+			{
+				Assert.AreEqual(null, Kata.sqInRect(5, 5));
+			}
+		}
+
 
 	}
 }
