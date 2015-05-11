@@ -138,5 +138,21 @@ namespace Codewars.Test
 				Assert.AreEqual(1, Kata.IqTest("1 2 2"));
 			}
 		}
+
+		public class StairsTests
+		{
+			[Test]
+			public void Test1()
+			{
+				Assert.AreEqual(6, Kata.NumberOfSteps(10, 2));
+			}
+
+			[Test]
+			public void Test2()
+			{
+//				Assert.AreEqual(-1, Kata.NumberOfSteps(3, 5));
+			}
+		}
+
 	}
 }

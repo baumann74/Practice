@@ -116,7 +116,6 @@ namespace Codewars
 		{
 			if (n < 0 || n > 16) throw new ArgumentOutOfRangeException();
 			return n == 0 ? 1 : Enumerable.Range(1, n).Aggregate(1, (a, c) => a * c);
-//			return x == 0 ? 1 : x * Factorial(x - 1);
 		}
 
 		public static int IqTest(string numbers)
@@ -126,6 +125,30 @@ namespace Codewars
 				.Where(y => int.Parse(y.s) % 2 == 1)
 				.Select(t => t.i + 1)
 				.Single();
+		}
+
+		// http://www.codewars.com/kata/55251c0d2142d7b4ab000aef/train/csharp
+
+		private static int[,] cache;
+
+		public static int NumberOfSteps(int n, int m)
+		{
+			cache = new int[n+1,n+1];
+			var result = NumberOfStepsHelper(n, m, 0);
+			return (result == int.MaxValue) ? -1 : result;
+		}
+
+		private static int NumberOfStepsHelper(int n, int m, int steps)
+		{
+			if (n < 0) return int.MaxValue;
+			if (n  == 0)
+			{
+				return (steps % m == 0) ? steps : int.MaxValue;
+			}
+			if (cache[n, steps] != 0) return cache[n, steps];
+			cache[n, steps] = Math.Min(NumberOfStepsHelper(n - 2, m, steps + 1),
+				NumberOfStepsHelper(n - 1, m, steps + 1));
+			return cache[n, steps];
 		}
 	}
 }
