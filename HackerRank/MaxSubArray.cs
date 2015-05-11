@@ -1,23 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace HackerRank
 {
-
-	class Solution
+	public class MaxSubArray
 	{
-		static void Main(String[] args)
-		{
-			var t = int.Parse(Console.ReadLine());
-			for (var i = 0; i < t; i++)
-			{
-				var n = int.Parse(Console.ReadLine());
-				var list = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-				Console.WriteLine(string.Format("{0} {1}", 
-					Solve_contiguous(n, list), 
-					Solve_non_contigous(n, list)));
-			}
-		}
 
 		public static int Solve_contiguous(int n, int[] list)
 		{
