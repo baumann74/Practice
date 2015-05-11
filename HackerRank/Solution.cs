@@ -2,42 +2,53 @@
 
 namespace HackerRank
 {
-	using System.Collections.Generic;
-	using System.Linq;
 
 	class Solution
 	{
-		static void Main(String[] args)
+		static void Main(String[] args) 
 		{
-			var splitElements = Console.ReadLine().Split(' ');
-			var n = int.Parse(splitElements[0]);
-			var m = int.Parse(splitElements[1]);
-			var coins = Console.ReadLine().Split(' ');
-			var list = new List<int>();
-			for (var i = 0; i < m; i++)
+			var n = int.Parse(Console.ReadLine());
+			for (var i = 0; i < n; i++)
 			{
-				list.Add(int.Parse(coins[i]));
+				var j = int.Parse(Console.ReadLine());
+				Console.WriteLine(Solve(j));
 			}
-			Console.WriteLine(Solve(n, m, list.ToArray()));
 		}
 
-		public static long Solve(int n, int m, int[] coins)
+		private static long Solve(int t)
 		{
-			cache = new long[n + 1, coins.Length + 1];
-			var sortedCoins = coins.ToList();
-			sortedCoins.Sort();
-			return Calculate(n, m, sortedCoins.ToArray());
+			var combinations = GetBrickCombinations(t);
+			return Prime_numbers(combinations);
 		}
 
-		private static long[,] cache;
-
-		private static long Calculate(int n, int m, int[] coins)
+		private static int GetBrickCombinations(int t)
 		{
-			if (n == 0) return 1;
-			if (m == 0 || n < 0) return 0;
-			if (cache[n, m] != 0) return cache[n, m];
-			cache[n, m] = Calculate(n - coins[m - 1], m, coins) + Calculate(n, m - 1, coins);
-			return cache[n, m];
+			if (t < 0) return 0;
+			if (t <= 3) return 1;
+			return GetBrickCombinations(t - 1) + GetBrickCombinations(t - 4);
+		}
+
+		private static int Prime_numbers(int num)
+		{
+			var result = 0;
+			for (var i = 2; i <= num; i++)
+			{
+				if (Is_Prime(i))
+				{
+					result++;
+				}
+			}
+			return result;
+		}
+
+		private static bool Is_Prime(int num)
+		{
+			if (num <= 1) return false;
+			for (var i = 2; i <= Math.Sqrt(num); i++)
+			{
+				if (num % i == 0) return false;
+			}
+			return true;
 		}
 	}
 }
