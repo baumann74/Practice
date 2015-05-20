@@ -111,3 +111,32 @@ Test.describe("Who won the election", function () {
 		Test.assertEquals(getWinner(["A", "A", "B", "B", "C"]), null, "NULL expected");
 	});
 });
+
+
+// ********************************************************
+// Chain me
+// http://www.codewars.com/kata/54fb853b2c8785dd5e000957/train/javascript
+
+
+function chain(input, fs) {
+	return chainHelper(input, fs, 0);
+}
+
+function chainHelper(input, fs, index) {
+	if (index === fs.length) return input;
+	return chainHelper(fs[index](input), fs, index + 1);
+}
+
+function chainBetter(v, fns) {
+	return fns.reduce(function (accumulatedValue, fn) { return fn(accumulatedValue); }, v);
+}
+
+function add(x) {
+	return x + 10;
+}
+
+function mult(x) {
+	return x * 30;
+}
+
+Test.assertEquals(chain(2, [add, mult]), 360, "Error: chain function does not work");
