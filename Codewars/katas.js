@@ -162,3 +162,97 @@ Test.describe("Count characters in your string", function () {
 		Test.assertSimilar(count(""), {});
 	});
 });
+
+// ********************************************************
+// Find the Mine!
+// http://www.codewars.com/kata/528d9adf0e03778b9e00067e/train/javascript
+
+function mineLocation(field) {
+	for (var i = 0; i < field.length; i++) {
+		for (var j = 0; j < field[0].length; j++) {
+			if (field[i][j] === 1) {
+				return [i, j];
+			}
+		}
+	}
+	return null;
+}
+
+Test.assertSimilar(mineLocation([[1, 0], [0, 0]]), [0, 0]);
+Test.assertSimilar(mineLocation([[1, 0, 0], [0, 0, 0], [0, 0, 0]]), [0, 0]);
+Test.assertSimilar(mineLocation([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0]]), [2, 2]);
+
+
+// ********************************************************
+// Implementing Array.prototype.groupBy method
+// http://www.codewars.com/kata/53c2c3e78d298dddda000460/train/javascript
+
+Array.prototype.groupBy = function (fn) {
+	var result = {};
+	this.forEach(function (c) {
+		if (fn === undefined) {
+			result[c] ? result[c].push(c) : result[c] = [c];
+		} else {
+			result[fn(c)] ? result[fn(c)].push(c) : result[fn(c)] = [c];
+		}
+	});
+	return result;
+}
+
+// Better solution:
+Array.prototype.groupByBetter = function(fn) {
+	fn = fn || function (x) { return x; };
+  
+	return this.reduce(function (result, value) {
+		var key = fn(value);
+		result[key] = (result[key] || []).concat(value);
+		return result;
+	}, {});
+}
+
+Test.assertEquals(
+  JSON.stringify([1, 2, 3, 2, 4, 1, 5, 1, 6].groupBy()),
+  '{"1":[1,1,1],"2":[2,2],"3":[3],"4":[4],"5":[5],"6":[6]}'
+);
+
+Test.assertEquals(
+  JSON.stringify([1, 2, 3, 2, 4, 1, 5, 1, 6].groupBy(
+	function (_) { return _ % 3; }
+  )),
+  '{"0":[3,6],"1":[1,4,1,1],"2":[2,2,5]}'
+);
+
+var words = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+Test.assertEquals(
+  JSON.stringify(words.groupBy(
+	function (_) { return _.length; }
+  )),
+  '{"3":["one","two","six","ten"],"4":["four","five","nine"],"5":["three","seven","eight"]}'
+);
+
+// ********************************************************
+// Throwing Darts
+// http://www.codewars.com/kata/525dfedb5b62f6954d000006/train/javascript
+
+function scoreThrows(radiuses) {
+	if (radiuses.length === 0) return 0;
+	var bonus = true;
+	var result = radiuses.reduce(function (accu, value) {
+		if (value > 10) {
+			bonus = false;
+		} else if (value >= 5) {
+			accu += 5;
+			bonus = false;
+		} else {
+			accu += 10;
+		}
+		return accu;
+	}, 0);
+	return bonus ? result + 100 : result;
+}
+
+Test.assertEquals(scoreThrows([1, 5, 11]), 15);
+Test.assertEquals(scoreThrows([15, 20, 30]), 0);
+Test.assertEquals(scoreThrows([1, 2, 3, 4]), 140);
+Test.assertEquals(scoreThrows([]), 0);
+
