@@ -89,7 +89,7 @@ function getWinner(listOfBallots) {
 function getWinner_Better(list) {
 	var result = {};
 	var winNumber = list.length / 2;
-	list.forEach(function (char) { ++result[char] || (result[char] = 1); });
+	list.forEach(function (c) { ++result[c] || (result[c] = 1); });
 	var answer = Object.keys(result).filter(function (key) { if (result[key] > winNumber) return key; });
 	return answer[0] || null;
 }
@@ -140,3 +140,25 @@ function mult(x) {
 }
 
 Test.assertEquals(chain(2, [add, mult]), 360, "Error: chain function does not work");
+
+// ********************************************************
+// Count characters in your string
+// http://www.codewars.com/kata/52efefcbcdf57161d4000091/train/javascript
+
+
+function count(s) {
+	var countMap = {};
+	s.split('').forEach(function (c) {
+		countMap[c] ? countMap[c]++ : countMap[c] = 1;
+	});
+	return countMap;
+}
+
+Test.describe("Count characters in your string", function () {
+	Test.it("Test 01", function () {
+		Test.assertSimilar(count("aba"), {'a': 2, 'b': 1});
+	});
+	Test.it("Test 02", function () {
+		Test.assertSimilar(count(""), {});
+	});
+});
