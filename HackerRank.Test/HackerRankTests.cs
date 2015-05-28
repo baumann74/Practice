@@ -115,5 +115,14 @@ namespace HackerRank.Test
 		{
 			HackerRank.StockMaximize.Solve(n, list).Should().Be(result);
 		}
+
+		[TestCase(12, new[] { 1, 6, 9 }, 12)]
+		[TestCase(9, new[] { 3, 4, 4, 4, 8 }, 9)]
+		[TestCase(10, new[] { 4, 7}, 8)]
+		[TestCase(9, new[] { 5, 8 }, 8)]
+		public void Knapsack(int n, int[] coins, long result)
+		{
+			HackerRank.Knapsack.Solve(n, coins).Should().Be(result);
+		}
 	}
 }
