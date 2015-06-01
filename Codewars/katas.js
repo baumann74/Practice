@@ -256,3 +256,68 @@ Test.assertEquals(scoreThrows([15, 20, 30]), 0);
 Test.assertEquals(scoreThrows([1, 2, 3, 4]), 140);
 Test.assertEquals(scoreThrows([]), 0);
 
+
+// ********************************************************
+// Red herring
+// http://www.codewars.com/kata/55699a9664a8c14e14000161/train/csharp
+
+function fish(input) {
+	var countMap = {};
+	input.forEach(function(c) {
+		countMap[c] ? countMap[c]++ : countMap[c] = 1;
+	});
+	var singles = Object.keys(countMap).filter(function (key) { if (countMap[key] === 1) return key; });
+	var multiples = Object.keys(countMap).filter(function (key) { if (countMap[key] > 1) return key; });
+	return (singles.length == 1 && multiples.length >= 1) ? singles[0] : "no catch";
+};
+
+//1: 3
+//"red herring": 1
+
+Test.expect(fish([1, 1, 1, "red herring", 1]) === "red herring");
+Test.expect(fish(["red herring", "red herring", "red herring"]) === "no catch");
+Test.expect(fish(["red herring", "blue herring", "yellow herring"]) === "no catch");
+Test.expect(fish([1, 2, 1, 2]) === "no catch");
+Test.expect(fish(["red herring"]) === "no catch");
+
+
+// ********************************************************
+// Josephus Permutation
+// http://www.codewars.com/kata/josephus-permutation
+
+function josephus(items, k) {
+	return (items.length <= 1) ? items : find_josephus(items, k, find_next_index);
+}
+
+function find_josephus(items, k, get_index_func) {
+	var result = [], index = 0, orgLength = items.length, inResult = [];
+	while (true) {
+		index = get_index_func(items, result, index, k, inResult);
+		result.push(items[index]);
+		inResult[index] = true;
+		if (result.length === orgLength) return result;
+	}
+}
+
+function find_next_index(items, result, index, k, inResult) {
+	while (true) {
+		if (!inResult[index]) {
+			k--;
+			if (k == 0) return index;
+		}
+		index = (index === items.length - 1) ? 0 : index + 1;
+	}
+}
+
+Test.assertSimilar(josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+Test.assertSimilar(josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2), [2, 4, 6, 8, 10, 3, 7, 1, 9, 5]);
+Test.assertSimilar(josephus(["C", "o", "d", "e", "W", "a", "r", "s"], 4), ['e', 's', 'W', 'o', 'C', 'd', 'r', 'a']);
+Test.assertSimilar(josephus([1, 2, 3, 4, 5, 6, 7], 3), [3, 6, 2, 7, 5, 1, 4]);
+Test.assertSimilar(josephus([], 3), []);
+Test.assertSimilar(josephus([1], 3), [1]);
+Test.assertSimilar(josephus([1, 2, 3], 4), [1, 3, 2]);
+
+
+// ********************************************************
+// Movie agent
+// http://www.codewars.com/kata/movie-agent
