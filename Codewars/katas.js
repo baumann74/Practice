@@ -309,6 +309,22 @@ function find_next_index(items, result, index, k, inResult) {
 	}
 }
 
+function josephus_better(items, k) {
+	var index = 0;
+	var result = [];
+
+	while (items.length) {
+		index += k - 1;
+		index %= items.length;
+		result.push(items.splice(index, 1)[0]);
+	}
+	return result;
+}
+
+// When you have a circular buffer then you don't have to manually set the index to the start. The modulus takes care of that:
+// index += k - 1;
+// index %= items.length;
+
 Test.assertSimilar(josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 Test.assertSimilar(josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2), [2, 4, 6, 8, 10, 3, 7, 1, 9, 5]);
 Test.assertSimilar(josephus(["C", "o", "d", "e", "W", "a", "r", "s"], 4), ['e', 's', 'W', 'o', 'C', 'd', 'r', 'a']);
@@ -321,3 +337,52 @@ Test.assertSimilar(josephus([1, 2, 3], 4), [1, 3, 2]);
 // ********************************************************
 // Movie agent
 // http://www.codewars.com/kata/movie-agent
+
+function Movie(name, start, end) {
+	this.name = name;
+	this.start = start;
+	this.end = end;
+}
+
+function schedule(movies) {
+	if (movies.length == 0) return 0;
+	if (movies.length == 1) return 1;
+	var sortedMovies = sortByKey(movies, "start");
+	return schedule_helper(sortedMovies, 0, 0, 0);
+}
+
+function schedule_helper(movies, end, count, index) {
+	if (index === movies.length) return count;
+	return (movies[index].start > end)
+		? Math.max(schedule_helper(movies, movies[index].end, count + 1, index + 1),
+			schedule_helper(movies, end, count, index + 1))
+		: schedule_helper(movies, end, count, index + 1);
+}
+
+function sortByKey(array, key) {
+	return array.sort(function(a, b) {
+		var x = a[key]; var y = b[key];
+		return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+	});
+}
+
+function schedule_better(movies) {
+	var result = 0,
+		end = -1;
+	movies.sort(function (l, r) { return l.end - r.end; });
+	movies.forEach(function (m) {
+		if (m.start > end) {
+			end = m.end;
+			result++;
+		}
+	});
+
+	return result;
+}
+var movies = [new Movie('Java Joe', 0, 50),
+			  new Movie('Looking for Clojure', 1, 5),
+			  new Movie('I C you', 6, 10),
+			  new Movie('Ruby Park', 11, 14)];
+Test.assertEquals(schedule(movies), 3);
+Test.assertEquals(schedule([]), 0);
+Test.assertEquals(schedule([new Movie('Java Joe', 0, 50)]), 1);
