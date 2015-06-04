@@ -321,3 +321,113 @@ Test.assertSimilar(josephus([1, 2, 3], 4), [1, 3, 2]);
 // ********************************************************
 // Movie agent
 // http://www.codewars.com/kata/movie-agent
+
+
+
+
+// ********************************************************
+// Stop the Zombie Apocalypse!
+// http://www.codewars.com/kata/stop-the-zombie-apocalypse
+
+
+function findZombies(matrix) {
+	var result = matrix.map(function (row) { // fill with 0.
+		return row.map(function (cell) {
+			return 0;
+		});
+	});
+	result[0][0] = 1;
+	return traverse(matrix, result, 0, 0, matrix[0][0]);
+}
+
+function traverse(matrix, result, row, column, zombie) {
+	var nextSteps = find_next_steps(matrix, result, row, column, zombie), nextPos;
+	for (var i = 0; i < nextSteps.length; i++) {
+		nextPos = nextSteps[i];
+		result[nextPos[0]][nextPos[1]] = 1;
+		result = traverse(matrix, result, nextPos[0], nextPos[1], zombie);
+	}
+	return result;
+}
+
+function find_next_steps(matrix, resultMatrix, row, column, zombie) {
+	var result = [];
+	if (row - 1 >= 0 && matrix[row - 1][column] === zombie && resultMatrix[row - 1][column] === 0) result.push([row - 1, column]); // up
+	if (column + 1 <= matrix[0].length - 1 && matrix[row][column + 1] === zombie && resultMatrix[row][column + 1] === 0) result.push([row, column + 1]); // right
+	if (row + 1 <= matrix.length - 1 && matrix[row + 1][column] === zombie && resultMatrix[row + 1][column] === 0) result.push([row + 1, column]); // down
+	if (column - 1 >= 0 && matrix[row][column - 1] === zombie && resultMatrix[row][column - 1] === 0) result.push([row, column - 1]); // left
+	return result;
+}
+
+// Here it is better to make all the checks in the beginning of the recursive method. Like the regular stop statement.
+// Then you don't have to find out which steps are valid. You just call up, down, left, right and the stop statements
+// will make sure that no invalid position are evaluated.
+
+function findZombiesBetter(matrix) {
+	var zombie_number = matrix[0][0];
+	// matrix with zeros
+	var bomb_map = matrix.map(function (row) {
+		return row.map(function (cell) {
+			return 0;
+		});
+	});
+
+	function markZombies(row, col) {
+		// check if position is valid
+		if (!bomb_map[row]) return;
+		// visited
+		if (bomb_map[row][col]) return;
+		// check if zombie exists here
+		if (matrix[row][col] === zombie_number) {
+			bomb_map[row][col] = 1;
+
+			markZombies(row - 1, col); // up
+			markZombies(row + 1, col); // down
+			markZombies(row, col - 1); // left
+			markZombies(row, col + 1); // right
+		}
+	}
+
+	markZombies(0, 0);
+
+	return bomb_map;
+}
+
+var exampleMatrix = [
+	[8, 2, 3],
+	[8, 2, 3],
+	[1, 2, 8]
+];
+
+var exampleResult = [
+	[1, 0, 0],
+	[1, 0, 0],
+	[0, 0, 0]
+];
+
+var city2 = [
+	[9, 1, 2],
+	[9, 9, 9],
+	[7, 4, 9],
+	[7, 9, 7]
+];
+
+var contaminatedInCity2 = [
+	[1, 0, 0],
+	[1, 1, 1],
+	[0, 0, 1],
+	[0, 0, 0]
+]; //infection inflicted the 9s, but the virus didn't get to the one in the south of the city yet.
+
+describe('Test Zombie maps', function () {
+	it('should show zombies in 3x3 matrix', function () {
+		Test.assertSimilar(findZombies(exampleMatrix), exampleResult);
+	});
+});
+
+describe('Test Zombie maps', function () {
+	it('should show zombies in 4x3 matrix', function () {
+		Test.assertSimilar(findZombies(city2), contaminatedInCity2);
+	});
+});
+
