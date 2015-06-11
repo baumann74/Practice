@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BiggerIsGreater.cs" />
     <Compile Include="CoinChangeProblem.cs" />
+    <Compile Include="GameOfThrones1.cs" />
     <Compile Include="Knapsack.cs" />
     <Compile Include="MaxSubArray.cs" />
     <Compile Include="Panagrams.cs" />

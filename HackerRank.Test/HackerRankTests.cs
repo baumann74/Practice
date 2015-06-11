@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -123,6 +124,14 @@ namespace HackerRank.Test
 		public void Knapsack(int n, int[] coins, long result)
 		{
 			HackerRank.Knapsack.Solve(n, coins).Should().Be(result);
+		}
+
+		[TestCase("aaabbbb", "YES")]
+		[TestCase("cdefghmnopqrstuvw", "NO")]
+		[TestCase("cdcdcdcdeeeef", "YES")]
+		public void GameOfThrones1(string s, string result)
+		{
+			HackerRank.GameOfThrones1.Solve(s).Should().Be(result);
 		}
 	}
 }
