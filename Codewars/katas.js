@@ -532,3 +532,42 @@ Test.describe("Testing For Sum of Pairs", function () {
 	Test.expect(sum_pairs(l7, 0) + "" == [0, 0] + "", "Zeroes: [" + l7 + "] should return [0, 0] for sum = 0");
 	Test.expect(sum_pairs(l8, 10) + "" == [13, -3] + "", "Subtraction: [" + l8 + "] should return [13, -3] for sum = 10");
 });
+
+// ********************************************************
+// http://www.codewars.com/kata/54c9fcad28ec4c6e680011aa/train/javascript
+// Merged String Checker
+
+function isMerge(s, part1, part2) {
+	var lastPart1Index = -1, lastPart2Index = -1, index;
+	for (var i = 0; i < s.length; i++) {
+		index = part1.indexOf(s[i]);
+		if (index >= 0) {
+			if (index >= lastPart1Index) {
+				lastPart1Index = index;
+				part1 = part1.slice(0, index) + part1.slice(index + 1, part1.length);
+			} else {
+				return false;
+			}
+		} else {
+			index = part2.indexOf(s[i]);
+			if (index >= 0) {
+				if (index >= lastPart2Index) {
+					lastPart2Index = index;
+					part2 = part2.slice(0, index) + part2.slice(index + 1, part2.length);
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+	return part1.length === 0 && part2.length === 0;
+}
+
+Test.expect(isMerge('codewars', 'code', 'wars'));
+Test.expect(isMerge('codewars', 'cdw', 'oears'));
+Test.expect(!isMerge('codewars', 'cod', 'wars'));
+Test.expect(isMerge('Bananas from Bahamas', 'Bananas B', 'from ahamas'));
+
+
