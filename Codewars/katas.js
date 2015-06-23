@@ -570,4 +570,15 @@ Test.expect(isMerge('codewars', 'cdw', 'oears'));
 Test.expect(!isMerge('codewars', 'cod', 'wars'));
 Test.expect(isMerge('Bananas from Bahamas', 'Bananas B', 'from ahamas'));
 
+// ********************************************************
+// http://www.codewars.com/kata/52b4d1be990d6a2dac0002ab/train/javascript
+// Longest sequence with zero sum
 
+var maxZeroSequence = function (arr) {
+	var result = [];
+
+
+}
+
+Test.assertSimilar(maxZeroSequence([25, -35, 12, 6, 92, -115, 17, 2, 2, 2, -7, 2, -9, 16, 2, -11]),
+								  [92, -115, 17, 2, 2, 2]);
