@@ -575,9 +575,17 @@ Test.expect(isMerge('Bananas from Bahamas', 'Bananas B', 'from ahamas'));
 // Longest sequence with zero sum
 
 var maxZeroSequence = function (arr) {
-	var result = [];
-
-
+	var result = [], zeroSumIndexstart = 0, zeroSumLength = 0;
+	for (var i = 0; i < arr.length; i++) {
+		for (var j = 0; j <= i; j++) {
+			result[j] ? result[j] = result[j] + arr[i] : result[j] = arr[i];
+			if (result[j] == 0 && (i - j) > zeroSumLength) {
+				zeroSumLength = i - j;
+				zeroSumIndexstart = j;
+			}
+		}
+	}
+	return arr.slice(zeroSumIndexstart, zeroSumIndexstart + zeroSumLength + 1);
 }
 
 Test.assertSimilar(maxZeroSequence([25, -35, 12, 6, 92, -115, 17, 2, 2, 2, -7, 2, -9, 16, 2, -11]),
