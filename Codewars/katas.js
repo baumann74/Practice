@@ -590,3 +590,44 @@ var maxZeroSequence = function (arr) {
 
 Test.assertSimilar(maxZeroSequence([25, -35, 12, 6, 92, -115, 17, 2, 2, 2, -7, 2, -9, 16, 2, -11]),
 								  [92, -115, 17, 2, 2, 2]);
+
+
+// ******************************************************** 
+// http://www.codewars.com/kata/555615a77ebc7c2c8a0000b8/train/javascript
+
+function tickets(peopleInLine) {
+	var bill25 = 0, bill50 = 0;
+
+	for (var i = 0; i < peopleInLine.length; i++) {
+		if (peopleInLine[i] === 25) {
+			bill25 += 1;
+		} else if (peopleInLine[i] == 50) {
+			if (bill25 > 0) {
+				bill25--;
+				bill50++;
+			} else {
+				return "NO";
+			}
+		} else if (bill25 > 0 && bill50 > 0) {
+			bill25--;
+			bill50--;
+		} else if (bill25 >= 3) {
+			bill25 -= 3;
+		} else {
+			return "NO";
+		}
+	}
+	return "YES";
+}
+
+Test.assertEquals(tickets([25, 25, 50, 50]), "YES");
+Test.assertEquals(tickets([25, 100]), "NO");
+Test.assertEquals(tickets([25, 50, 100]), "NO");
+Test.assertEquals(tickets([25, 50, 50]), "NO");
+Test.assertEquals(tickets([25, 50, 25, 100]), "YES");
+Test.assertEquals(tickets([25, 25, 25, 100, 25, 50, 25, 100, 25, 25, 25, 100]), "YES");
+Test.assertEquals(tickets([25, 25, 50, 100, 25, 25, 50, 100, 25, 25, 25, 100, 25, 25, 50, 100, 25, 25, 25, 100]), "YES");
+//Line = 25,25,25,100,25,50,25,100,25,25,50,100,25,50,25,100 - Expected: YES, instead got: NO
+//Line = 25,50,25,100,25,25,25,100,25,50,25,100,25,25,25,100 - Expected: YES, instead got: NO
+
+
