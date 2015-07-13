@@ -627,7 +627,114 @@ Test.assertEquals(tickets([25, 50, 50]), "NO");
 Test.assertEquals(tickets([25, 50, 25, 100]), "YES");
 Test.assertEquals(tickets([25, 25, 25, 100, 25, 50, 25, 100, 25, 25, 25, 100]), "YES");
 Test.assertEquals(tickets([25, 25, 50, 100, 25, 25, 50, 100, 25, 25, 25, 100, 25, 25, 50, 100, 25, 25, 25, 100]), "YES");
-//Line = 25,25,25,100,25,50,25,100,25,25,50,100,25,50,25,100 - Expected: YES, instead got: NO
-//Line = 25,50,25,100,25,25,25,100,25,50,25,100,25,25,25,100 - Expected: YES, instead got: NO
 
 
+// ********************************************************
+// http://www.codewars.com/kata/5326ef17b7320ee2e00001df/train/javascript
+// Escape the Mines !
+
+function solve(map, miner, exit) {
+	var rute = [];
+	var visited_map = map.map(function (row) {
+		return row.map(function() {
+			return false;
+		});
+	});
+	solveHelper(map, miner.x, miner.y, exit, visited_map, rute);
+	return rute;
+}
+
+function solveHelper(map, x, y, exit, visited_map, rute) {
+	if (x === exit.x && y === exit.y) return true;
+
+	if (!map[0][y] || !map[x] || !map[x][y] || visited_map[x][y]) return false;
+
+	visited_map[x][y] = true;
+
+	rute.push("up");
+	if (solveHelper(map, x, y - 1, exit, visited_map, rute)) return true;
+	rute.splice(rute.length - 1, 1);
+
+	rute.push("right");
+	if (solveHelper(map, x + 1, y, exit, visited_map, rute)) return true;
+	rute.splice(rute.length - 1, 1);
+
+	rute.push("down");
+	if (solveHelper(map, x, y + 1, exit, visited_map, rute)) return true;
+	rute.splice(rute.length - 1, 1);
+
+	rute.push("left");
+	if (solveHelper(map, x - 1, y, exit, visited_map, rute)) return true;
+	rute.splice(rute.length - 1, 1);
+
+	return false;
+}
+
+
+//describe('A trivial map (1x1)', function () {
+//	var map = [[true]];
+//
+//	it('Should return an empty array, since we\'re already at the goal', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 0, y: 0 }), []);
+//	});
+//});
+//
+//describe('A pretty simple map (2x2)', function () {
+//	var map = [[true, false],
+//	  [true, true]];
+//
+//	it('Should return the only correct move', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 1, y: 0 }), ['right']);
+//	});
+//
+//	it('Should return the only moves necessary', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 1, y: 1 }), ['right', 'down']);
+//	});
+//});
+//
+//describe('A linear map(1x4)', function () {
+//	var map = [[true], [true], [true], [true]];
+//
+//	it('Should return a chain of moves to the right', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 3, y: 0 }), ['right', 'right', 'right']);
+//	});
+//
+//	it('Should return a chain of moves to the left', function () {
+//		Test.assertSimilar(solve(map, { x: 3, y: 0 }, { x: 0, y: 0 }), ['left', 'left', 'left']);
+//	});
+//});
+//
+//describe('Should walk around an obstacle (3x3 map)', function () {
+//	var map = [[true, true, true],
+//	[false, false, true],
+//	[true, true, true]];
+//
+//	it('Should return the right sequence of moves', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 2, y: 0 }), ['down', 'down', 'right', 'right', 'up', 'up']);
+//	});
+//});
+
+describe('Should be able to change directions multiple times (5x5 map)', function () {
+	var map = [[true, true, false, false, false],
+	  [false, true, true, false, false],
+	  [false, false, true, true, false],
+	  [false, false, false, true, true],
+	  [false, false, false, false, true]];
+
+	it('Should return a step sequence of moves', function () {
+		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 4, y: 4 }),
+		  ['down', 'right', 'down', 'right', 'down', 'right', 'down', 'right']);
+	});
+});
+//
+//describe('Should avoid dead-ends (5x5 map)', function () {
+//	var map = [[true, true, true, false, true],
+//	  [false, false, true, false, true],
+//	  [true, true, true, true, true],
+//	  [true, false, true, false, false],
+//	  [false, true, true, true, true]];
+//
+//	it('Should return the right moves', function () {
+//		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 4, y: 4 }), ['down', 'down', 'right', 'right', 'right', 'right', 'down', 'down'])
+//	});
+//});
