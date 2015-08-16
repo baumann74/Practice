@@ -741,7 +741,6 @@ describe('Should avoid dead-ends (5x5 map)', function () {
 
 // ********************************************************
 // http://www.codewars.com/kata/537400e773076324ab000262/train/javascript
-
 // Group Anagrams
 
 function groupAnagrams(words) {
@@ -756,3 +755,51 @@ function groupAnagrams(words) {
 Test.assertSimilarUnsorted([[1, 2], [3]], [[3], [1, 2]]); // assertSimilarUnsorted is implemented by myself.
 Test.assertSimilarUnsorted(groupAnagrams(["rat", "tar", "star"]), [["rat", "tar"], ["star"]]);
 Test.assertSimilarUnsorted(groupAnagrams(["rat", "ok", "tar", "star", "ko"]), [["rat", "tar"], ["star"], ["ok", "ko"]]);
+
+
+// ********************************************************
+// http://www.codewars.com/kata/537e18b6147aa838f600001b/train/javascript
+// Text align justify
+
+var justify = function (str, len) {
+	var split_words = str.split(' ');
+	var lines = reformat(split_words, len);
+	return lines.join('\n');
+};
+
+function reformat(words, len) {
+	return reformat_helper(words, 0, len, [], [], 0);
+}
+
+function reformat_helper(words, index, len, lineList, lines, lineLength) {
+	var word, gap, wordIndex;
+	if (index >= words.length) {
+		if (lineList.length > 0) {
+			lines.push(lineList.join('').trim());
+		}
+		return lines;
+	}
+
+	word = words[index];
+	if (lineLength + word.length <= len) {
+		lineList.push(word.concat(' '));
+		return reformat_helper(words, index + 1, len, lineList, lines, lineLength + word.length + 1);
+	}
+
+	gap = len - (lineLength - 1);
+	wordIndex = 0;
+	while (gap > 0) {
+		lineList[wordIndex] = lineList[wordIndex].concat(' ');
+		 wordIndex++;
+		 wordIndex %= lineList.length - 1; // -1: the last word should not get any gaps.
+		 gap--;
+	}
+
+	lines.push(lineList.join('').trim());
+
+	return reformat_helper(words, index + 1, len, [word.concat(' ')], lines, 0);
+}
+
+Test.assertEquals(justify("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 30),
+						  "Lorem  ipsum  dolor  sit amet,\nconsectetur adipiscing elit.");
+
