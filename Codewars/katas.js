@@ -735,6 +735,24 @@ describe('Should avoid dead-ends (5x5 map)', function () {
 	  [false, true, true, true, true]];
 
 	it('Should return the right moves', function () {
-		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 4, y: 4 }), ['down', 'down', 'right', 'right', 'right', 'right', 'down', 'down'])
+		Test.assertSimilar(solve(map, { x: 0, y: 0 }, { x: 4, y: 4 }), ['down', 'down', 'right', 'right', 'right', 'right', 'down', 'down']);
 	});
 });
+
+// ********************************************************
+// http://www.codewars.com/kata/537400e773076324ab000262/train/javascript
+
+// Group Anagrams
+
+function groupAnagrams(words) {
+	var map = {};
+	words.forEach(function(word) {
+		var sortedWord = word.split('').sort().join();
+		map[sortedWord] = (map[sortedWord] || []).concat(word);
+	});
+	return Object.keys(map).map(function (key) { return map[key]; });
+}
+
+Test.assertSimilarUnsorted([[1, 2], [3]], [[3], [1, 2]]); // assertSimilarUnsorted is implemented by myself.
+Test.assertSimilarUnsorted(groupAnagrams(["rat", "tar", "star"]), [["rat", "tar"], ["star"]]);
+Test.assertSimilarUnsorted(groupAnagrams(["rat", "ok", "tar", "star", "ko"]), [["rat", "tar"], ["star"], ["ok", "ko"]]);

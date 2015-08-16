@@ -193,6 +193,30 @@
 				Test.expect(true, null, options)
 			}
 		},
+		assertSimilarUnsorted: function (actual, expected, msg, options) {
+			var self = this;
+			var result = actual.length == expected.length &&
+				actual.filter(function(x) { return self.isArrayInTwoDimArray(x, expected); }).length == expected.length;
+			if (result) {
+				options = options || {};
+				options.successMsg = options.successMsg || 'Value == ' + Test.inspect(expected);
+				Test.expect(true, null, options);
+			} else {
+				msg = _message('Not similar: ' + Test.inspect(expected) + ' and ' + Test.inspect(actual), msg);
+				Test.expect(false, msg, options);
+			}
+		},
+		isArrayInTwoDimArray: function (a, b) {
+			var self = this;
+			return b.some(function(elem) { return self.areArraysEqual(a, elem); });
+		},
+		areArraysEqual: function(a, b) {
+			if (a.length !== b.length) return false;
+			for (var i = 0; i < a.length; i++) {
+				if (a[i] !== b[i]) return false;
+			}
+			return true;
+		},
 		expectNoError: function (msg, fn) {
 			logCall('expectNoError')
 			if (!fn) {
