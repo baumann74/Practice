@@ -131,7 +131,7 @@ function chainBetter(v, fns) {
 	return fns.reduce(function (accumulatedValue, fn) { return fn(accumulatedValue); }, v);
 }
 
-function add(x) {
+function add_chain(x) {
 	return x + 10;
 }
 
@@ -139,7 +139,7 @@ function mult(x) {
 	return x * 30;
 }
 
-Test.assertEquals(chain(2, [add, mult]), 360, "Error: chain function does not work");
+Test.assertEquals(chain(2, [add_chain, mult]), 360, "Error: chain function does not work");
 
 // ********************************************************
 // Count characters in your string
@@ -786,20 +786,86 @@ function reformat_helper(words, index, len, lineList, lines, lineLength) {
 		return reformat_helper(words, index + 1, len, lineList, lines, lineLength + word.length + 1);
 	}
 
-	gap = len - (lineLength - 1);
-	wordIndex = 0;
-	while (gap > 0) {
-		lineList[wordIndex] = lineList[wordIndex].concat(' ');
-		 wordIndex++;
-		 wordIndex %= lineList.length - 1; // -1: the last word should not get any gaps.
-		 gap--;
+	if (lineList.length > 1) {
+		gap = len - (lineLength - 1);
+		wordIndex = 0;
+		while (gap > 0) {
+			lineList[wordIndex] = lineList[wordIndex].concat(' ');
+			wordIndex++;
+			wordIndex %= lineList.length - 1; // -1: the last word should not get any gaps.
+			gap--;
+		}
 	}
 
 	lines.push(lineList.join('').trim());
 
-	return reformat_helper(words, index + 1, len, [word.concat(' ')], lines, 0);
+	return reformat_helper(words, index, len, [], lines, 0);
 }
 
 Test.assertEquals(justify("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 30),
 						  "Lorem  ipsum  dolor  sit amet,\nconsectetur adipiscing elit.");
 
+Test.assertEquals(justify("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis dolor mauris, at elementum ligula", 15),
+						  "Lorem     ipsum\ndolor sit amet,\nconsectetur\nadipiscing\nelit.\nVestibulum\nsagittis  dolor\nmauris,      at\nelementum\nligula");
+
+
+// ********************************************************
+// http://www.codewars.com/kata/558c04ecda7fb8f48b000075/train/javascript
+// Same Array?
+
+function same(aArr, bArr) {
+	return sameHelper(aArr, bArr, containsArray, areArraysEqual);
+}
+
+function sameHelper(aArr, bArr, containsArray, areArraysEqual) {
+	return aArr.length == bArr.length &&
+		aArr.filter(function (x) { return containsArray(x, bArr, areArraysEqual); }).length == bArr.length;
+}
+
+function containsArray(a, b, areArraysEqual) {
+	return b.some(function(elem) { return areArraysEqual(a, elem); });
+}
+
+function areArraysEqual(a, b) {
+	if (a.length !== b.length) return false;
+	return a.filter(function (x) { return b.indexOf(x) != -1; }).length == b.length;
+}
+
+// My solution will work with all types of objects and any number of elements in the arrays.
+// Better solution since we know that the arrays always have two numbers. 
+// We are therefore allowed to create a string of teach array and compare these arrays.
+function same(aArr, bArr) {
+	var flatA = aArr.map(function (a) { return a.sort().join(''); }).sort().join('');
+	var flatB = bArr.map(function (a) { return a.sort().join(''); }).sort().join('');
+	return flatA === flatB;
+}
+
+describe('Simple 2x2 arrays', function () {
+	it('same arrays', function () {
+		Test.expect(same([[2, 5], [3, 6]], [[5, 2], [3, 6]]), "Value not what is expected for [[2,5], [3,6]] and [[5,2], [3,6]]");
+		Test.expect(same([[2, 5], [3, 6]], [[6, 3], [5, 2]]), "Value not what is expected for [[2,5], [3,6]] and [[6,3], [5,2]]");
+		Test.expect(same([[2, 5], [3, 6]], [[6, 3], [2, 5]]), "Value not what is expected for [[2,5], [3,6]] and [[6,3], [2,5]]");
+	});
+});
+
+describe('Simple 3x3 arrays', function () {
+	it('same arrays', function () {
+		Test.expect(same([[2, 5], [3, 5], [6, 2]], [[2, 6], [5, 3], [2, 5]]), "Value not what is expected for [[2,5], [3,5], [6,2]] and [[2,6], [5,3], [2,5]]");
+		Test.expect(same([[2, 5], [3, 5], [6, 2]], [[3, 5], [6, 2], [5, 2]]), "Value not what is expected for [[2,5], [3,5], [6,2]] and [[3,5], [6,2], [5,2]]");
+	});
+});
+
+describe('Empty arrays', function () {
+	it('same arrays', function () {
+		Test.expect(same([], []), "Value not what is expected for [] and []");
+	});
+});
+
+describe('Unequal arrays', function () {
+	it('not same arrays', function () {
+		Test.expect(!same([[2, 3], [3, 4]], [[4, 3], [2, 4]]), "Value not what is expected for [[2,3], [3,4]] and [[4,3], [2, 4]]");
+		Test.expect(!same([[2, 3], [3, 2]], [[2, 3]]), "Value not what is expected for [[2,3], [3,2]] and [[2,3]]");
+	});
+});
+
+// ********************************************************
