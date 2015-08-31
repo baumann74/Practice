@@ -151,7 +151,7 @@ namespace Codewars
 			return cache[n, steps];
 		}
 
-		public static List<int> sqInRect(int lng, int wdth)
+		public static List<int> SqInRect(int lng, int wdth)
 		{
 			if (lng == wdth) return null;
 			var resultList = new List<int>();
@@ -170,5 +170,46 @@ namespace Codewars
 			resultList.Add(wdth);
 			SqInRectHelper(lng - wdth, wdth, resultList);
 		}
+
+		// http://www.codewars.com/kata/decode-the-morse-code/train/csharp
+
+		public class MorseCodeDecoder
+		{
+			private static string Get(string c)
+			{
+				return c + "";
+			}
+
+			public static string Decode(string morseCode)
+			{
+				var words = morseCode.Trim().Split(new [] {"  "}, StringSplitOptions.RemoveEmptyEntries).ToList();
+				var morsedList = words.Select(word => string.Join("", word.Split(' ').Select(Get)));
+				return string.Join(" ", morsedList);
+			}
+		}
+
+		public class MorseCodeDecoderBetter
+		{
+			private static string Get(string c)
+			{
+				return c + "";
+			}
+
+			public static string Decode(string morseCode)
+			{
+				// Integration because it is just a number of method calls.
+				return string.Join(" ",
+					morseCode
+					.Trim()
+					.Split(new[] { "  " }, StringSplitOptions.RemoveEmptyEntries)
+					.Select(TranslateWord));
+			}
+
+			private static string TranslateWord(string morse)
+			{
+				return string.Join("", morse.Split(' ').Select(Get));
+			}
+		}
+
 	}
 }

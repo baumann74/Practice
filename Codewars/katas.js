@@ -833,7 +833,7 @@ function areArraysEqual(a, b) {
 
 // My solution will work with all types of objects and any number of elements in the arrays.
 // Better solution since we know that the arrays always have two numbers. 
-// We are therefore allowed to create a string of teach array and compare these arrays.
+// We are therefore allowed to create a string of each array and compare these arrays.
 function same(aArr, bArr) {
 	var flatA = aArr.map(function (a) { return a.sort().join(''); }).sort().join('');
 	var flatB = bArr.map(function (a) { return a.sort().join(''); }).sort().join('');

@@ -8,13 +8,13 @@ namespace Codewars.Test
 		[Test]
 		public void GetMissingElement_EightIsMissing()
 		{
-			Assert.AreEqual(8, Kata.GetMissingElement(new int[9] {0, 5, 1, 3, 2, 9, 7, 6, 4}));
+			Assert.AreEqual(8, Kata.GetMissingElement(new[] {0, 5, 1, 3, 2, 9, 7, 6, 4}));
 		}
 
 		[Test]
 		public void GetMissingElement_ThreeIsMissing()
 		{
-			Assert.AreEqual(3, Kata.GetMissingElement(new int[9] {9, 2, 4, 5, 7, 0, 8, 6, 1}));
+			Assert.AreEqual(3, Kata.GetMissingElement(new[] {9, 2, 4, 5, 7, 0, 8, 6, 1}));
 		}
 
 		[Test]
@@ -161,15 +161,13 @@ namespace Codewars.Test
 			public void Test1()
 			{
 				int[] r = new int[] { 3, 2, 1, 1 };
-				Assert.AreEqual(r, Kata.sqInRect(5, 3));
+				Assert.AreEqual(r, Kata.SqInRect(5, 3));
 			}
 			[Test]
 			public void Test3()
 			{
-				Assert.AreEqual(null, Kata.sqInRect(5, 5));
+				Assert.AreEqual(null, Kata.SqInRect(5, 5));
 			}
 		}
-
-
 	}
 }
