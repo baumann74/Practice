@@ -869,3 +869,33 @@ describe('Unequal arrays', function () {
 });
 
 
+// ********************************************************
+// http://www.codewars.com/kata/547bf139ec2cf10b7c0003e6/train/javascript
+// Binary search
+
+function binSearch(arr, toSearch) {
+	if (arr.length == 0) return -1;
+	return binSearchHelper(arr, toSearch, 0, arr.length - 1);
+}
+
+function binSearchHelper(arr, toSearch, start, end) {
+	if (start == end) return (arr[start] == toSearch) ? start : -1;
+	var middleIndex = start + ((end - start) / 2)|0;
+	var middleValue = arr[middleIndex];
+	if (middleValue == toSearch) return middleIndex;
+	return (middleValue > toSearch)
+		? binSearchHelper(arr, toSearch, start, middleIndex - 1)
+		: binSearchHelper(arr, toSearch, middleIndex + 1, end);
+}
+
+var arr = [1, 2, 3, 4, 5];
+var arr2 = [1, 2, 3, 4];
+
+Test.assertEquals(binSearch(arr, 6), -1);
+Test.assertEquals(binSearch(arr, 2), 1);
+Test.assertEquals(binSearch(arr, 1), 0);
+Test.assertEquals(binSearch(arr, 5), 4);
+Test.assertEquals(binSearch(arr2, 4), 3);
+Test.assertEquals(binSearch(arr2, 2), 1);
+Test.assertEquals(binSearch(arr2, 1), 0);
+Test.assertEquals(binSearch(arr2, 5), -1);
