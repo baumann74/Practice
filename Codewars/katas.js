@@ -899,3 +899,97 @@ Test.assertEquals(binSearch(arr2, 4), 3);
 Test.assertEquals(binSearch(arr2, 2), 1);
 Test.assertEquals(binSearch(arr2, 1), 0);
 Test.assertEquals(binSearch(arr2, 5), -1);
+
+
+// ********************************************************
+// http://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1/train/javascript
+// Snail sort
+
+snail = function(array) {
+
+	var result = [];
+	var trail = array.map(function(row) {
+		return row.map(function(cell) {
+			return false;
+		});
+	});
+
+
+	function canMoveRight(row, col) {
+		return col + 1 <= array[0].length - 1 && !trail[row][col + 1];
+	}
+
+	function canMoveDown(row, col) {
+		return row + 1 <= array.length - 1 && !trail[row + 1][col];
+	}
+
+	function canMoveUp(row, col) {
+		return row - 1 >= 0 && !trail[row - 1][col];
+	}
+
+	function canMoveLeft(row, col) {
+		return col - 1 >= 0 && !trail[row][col - 1];
+	}
+
+	function traverse(row, col, dir) {
+		if (row < 0 || row > array.length - 1) return;
+		if (col < 0 || col > array[0].length - 1) return;
+		if (trail[row][col]) return;
+
+		result.push(array[row][col]);
+		trail[row][col] = true;
+
+		if (dir === "right") {
+			if (canMoveRight(row, col)) {
+				traverse(row, col + 1, dir);
+			} else {
+				traverse(row + 1, col, "down");
+			}
+		}
+
+		if (dir === "down") {
+			if (canMoveDown(row, col)) {
+				traverse(row + 1, col, dir);
+			} else {
+				traverse(row, col - 1, "left");
+			}
+		}
+
+		if (dir === "left") {
+			if (canMoveLeft(row, col)) {
+				traverse(row, col - 1, dir);
+			} else {
+				traverse(row - 1, col, "up");
+			}
+		}
+
+		if (dir === "up") {
+			if (canMoveUp(row, col)) {
+				traverse(row - 1, col, dir);
+			} else {
+				traverse(row, col + 1, "right");
+			}
+		}
+	}
+
+	traverse(0, 0, "right");
+
+	return result;
+}
+
+
+var snailArray1 = 
+[
+	[1, 2, 3],
+	[4, 5, 6],
+	[7, 8, 9]
+];
+Test.assertSimilar(snail(snailArray1), [1, 2, 3, 6, 9, 8, 7, 4, 5]);
+
+var snailArray2 =
+[
+	[1, 2, 3],
+	[8, 9, 4],
+	[7, 6, 5]
+];
+Test.assertSimilar(snail(snailArray2), [1,2,3,4,5,6,7,8,9]);
