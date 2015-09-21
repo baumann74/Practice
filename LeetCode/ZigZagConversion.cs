@@ -5,13 +5,12 @@ using System.Linq;
 namespace LeetCode
 {
 	// https://leetcode.com/problems/zigzag-conversion/
+
 	public class ZigZagConversion
 	{
-
-		// solution.Convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR")
-
 		public string Convert(string s, int numRows)
 		{
+			if (numRows == 1) return s;
 			var rows = new List<string>(new string[numRows]);
 			var max = (numRows - 1);
 			for (var i = 0; i < s.Length; i++)
