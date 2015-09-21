@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrintDiamond\PrintDiamond.cs" />
+    <Compile Include="PrintDiamond.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RomanNumerals\RomanNumerals.cs" />
+    <Compile Include="RomanNumerals.cs" />
     <Compile Include="TennisGame\Game.cs" />
     <Compile Include="TennisGame\IGameState.cs" />
     <Compile Include="TennisGame\Player.cs" />
@@ -51,7 +51,7 @@
     <Compile Include="TennisGame\RegularPoint.cs" />
     <Compile Include="TennisGame\Point.cs" />
     <Compile Include="TennisGame\PointMap.cs" />
-    <Compile Include="WordWrap\WordWrap.cs" />
+    <Compile Include="WordWrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

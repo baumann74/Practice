@@ -1,10 +1,10 @@
 ﻿
 
-namespace Katas.WordWrap
-{
-	using System.Collections.Generic;
-	using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Katas
+{
 	public class WordWrap
 	{
 		public string Wrap(string s, int length)

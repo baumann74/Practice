@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Katas.PrintDiamond;
+using Katas;
 using NUnit.Framework;
 
 namespace KatasTest.PrintDiamondTests

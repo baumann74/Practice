@@ -1,9 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Katas.PrintDiamond
+namespace Katas
 {
 
 	public class PrintDiamond

@@ -1,8 +1,9 @@
 ﻿
+using Katas;
+
 namespace KatasTest.WordWrapTest
 {
 	using FluentAssertions;
-	using Katas.WordWrap;
 	using NUnit.Framework;
 	using System.Collections.Generic;
 	using System.Reflection;

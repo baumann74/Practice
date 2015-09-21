@@ -1,11 +1,10 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Katas.RomanNumerals
+namespace Katas
 {
-	using System;
-	using System.Linq;
-
 	public class RomanNumerals
 	{
 		private static readonly Dictionary<int, string> FactorToRoman = new Dictionary<int, string> 
