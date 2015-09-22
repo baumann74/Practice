@@ -144,13 +144,13 @@ namespace Codewars.Test
 			[Test]
 			public void Test1()
 			{
-				Assert.AreEqual(6, Kata.NumberOfSteps(10, 2));
+				Assert.AreEqual(6, Kata.NumberOfStepsImpl.NumberOfSteps(10, 2));
 			}
 
 			[Test]
 			public void Test2()
 			{
-				Assert.AreEqual(-1, Kata.NumberOfSteps(3, 5));
+				Assert.AreEqual(-1, Kata.NumberOfStepsImpl.NumberOfSteps(3, 5));
 			}
 		}
 
@@ -161,12 +161,34 @@ namespace Codewars.Test
 			public void Test1()
 			{
 				int[] r = new int[] { 3, 2, 1, 1 };
-				Assert.AreEqual(r, Kata.SqInRect(5, 3));
+				Assert.AreEqual(r, Kata.NumberOfStepsImpl.SqInRect(5, 3));
 			}
 			[Test]
 			public void Test3()
 			{
-				Assert.AreEqual(null, Kata.SqInRect(5, 5));
+				Assert.AreEqual(null, Kata.NumberOfStepsImpl.SqInRect(5, 5));
+			}
+		}
+
+		public class CountingChangeCombinationsTests
+		{
+
+			[Test]
+			public static void SimpleCase()
+			{
+				Assert.AreEqual(3, Kata.CountingChangeCombinations.CountCombinations(4, new[] { 1, 2 }));
+			}
+
+			[Test]
+			public static void AnotherSimpleCase()
+			{
+				Assert.AreEqual(4, Kata.CountingChangeCombinations.CountCombinations(10, new[] { 5, 2, 3 }));
+			}
+
+			[Test]
+			public static void NoChange()
+			{
+				Assert.AreEqual(0, Kata.CountingChangeCombinations.CountCombinations(11, new[] { 5, 7 }));
 			}
 		}
 	}

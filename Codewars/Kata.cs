@@ -1,6 +1,7 @@
 ﻿
 
 using System.Linq;
+using System.Net;
 
 namespace Codewars
 {
@@ -129,47 +130,51 @@ namespace Codewars
 
 		// http://www.codewars.com/kata/55251c0d2142d7b4ab000aef/train/csharp
 
-		private static int[,] cache;
-
-		public static int NumberOfSteps(int n, int m)
+		public class NumberOfStepsImpl
 		{
-			cache = new int[n+1,n+1];
-			var result = NumberOfStepsHelper(n, m, 0);
-			return (result == int.MaxValue) ? -1 : result;
-		}
+			private static int[,] cache;
 
-		private static int NumberOfStepsHelper(int n, int m, int steps)
-		{
-			if (n < 0) return int.MaxValue;
-			if (n  == 0)
+			public static int NumberOfSteps(int n, int m)
 			{
-				return (steps % m == 0) ? steps : int.MaxValue;
+				cache = new int[n + 1, n + 1];
+				var result = NumberOfStepsHelper(n, m, 0);
+				return (result == Int32.MaxValue) ? -1 : result;
 			}
-			if (cache[n, steps] != 0) return cache[n, steps];
-			cache[n, steps] = Math.Min(NumberOfStepsHelper(n - 2, m, steps + 1),
-				NumberOfStepsHelper(n - 1, m, steps + 1));
-			return cache[n, steps];
-		}
 
-		public static List<int> SqInRect(int lng, int wdth)
-		{
-			if (lng == wdth) return null;
-			var resultList = new List<int>();
-			SqInRectHelper(lng, wdth, resultList);
-			return resultList;
-		}
-
-		public static void SqInRectHelper(int lng, int wdth, List<int> resultList)
-		{
-			if (lng == 0) return;
-			if (wdth > lng)
+			private static int NumberOfStepsHelper(int n, int m, int steps)
 			{
-				SqInRectHelper(wdth, lng, resultList);
-				return;
+				if (n < 0) return Int32.MaxValue;
+				if (n == 0)
+				{
+					return (steps % m == 0) ? steps : Int32.MaxValue;
+				}
+				if (cache[n, steps] != 0) return cache[n, steps];
+				cache[n, steps] = Math.Min(NumberOfStepsHelper(n - 2, m, steps + 1),
+					NumberOfStepsHelper(n - 1, m, steps + 1));
+				return cache[n, steps];
 			}
-			resultList.Add(wdth);
-			SqInRectHelper(lng - wdth, wdth, resultList);
+
+			public static List<int> SqInRect(int lng, int wdth)
+			{
+				if (lng == wdth) return null;
+				var resultList = new List<int>();
+				SqInRectHelper(lng, wdth, resultList);
+				return resultList;
+			}
+
+			public static void SqInRectHelper(int lng, int wdth, List<int> resultList)
+			{
+				if (lng == 0) return;
+				if (wdth > lng)
+				{
+					SqInRectHelper(wdth, lng, resultList);
+					return;
+				}
+				resultList.Add(wdth);
+				SqInRectHelper(lng - wdth, wdth, resultList);
+			}
 		}
+
 
 		// http://www.codewars.com/kata/decode-the-morse-code/train/csharp
 
@@ -211,5 +216,31 @@ namespace Codewars
 			}
 		}
 
+		public class CountingChangeCombinations
+		{
+			private static int[,] cache;
+
+			public static int CountCombinations(int money, int[] coins)
+			{
+				cache = new int[coins.Count(), money];
+				return CountCombinationsHelper(money, coins, 0, 0);
+			}
+
+			public static int CountCombinationsHelper(int money, int[] coins, int index, int sum)
+			{
+				if (sum == money) return 1;
+				if (sum > money) return 0;
+				if (index >= coins.Count()) return 0;
+				var cacheValue = cache[index, sum];
+				if (cacheValue != 0)
+				{
+					return cacheValue;
+				}
+				cache[index, sum] = 
+					CountCombinationsHelper(money, coins, index, sum + coins[index]) +
+				       CountCombinationsHelper(money, coins, index + 1, sum);
+				return cache[index, sum];
+			}
+		}
 	}
 }
