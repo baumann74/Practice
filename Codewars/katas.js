@@ -994,7 +994,9 @@ var snailArray2 =
 Test.assertSimilar(snail(snailArray2), [1,2,3,4,5,6,7,8,9]);
 
 
+// ********************************************************
 http://www.codewars.com/kata/pyramid-slide-down/train/javascript
+// Longest slide down
 
 function longestSlideDown(pyramid) {
 	var cache = pyramid.map(function (row) {
@@ -1040,4 +1042,67 @@ Test.assertEquals(longestSlideDown(
   [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
   [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]),
   1074, "should work for medium pyramids");
-//
+
+
+// ********************************************************
+// http://www.codewars.com/kata/53223653a191940f2b000877/train/javascript
+// Determining if a graph has a solution
+
+function solve_graph(start, end, arcs) {
+	var arcsMap = {};
+	arcs.forEach(function (arc) {
+		arcsMap[arc.start] ? arcsMap[arc.start].push(arc.end) : arcsMap[arc.start] = [arc.end];
+	});
+
+	function solve_graph_helper(current, endArc, map, visited) {
+		var found = false, counter = 0;
+		if (visited.indexOf(current) > -1) return false;
+		if (current == endArc) return true;
+		visited.push(current);
+		while (!found && map[current] != undefined && counter < map[current].length) {
+			found = solve_graph_helper(map[current][counter], endArc, map, visited);
+			counter++;
+		}
+		return found;
+	}
+
+	return solve_graph_helper(start, end, arcsMap, []);
+}
+
+describe("Simple graph with 1 arc", function () {
+	var arcs = [
+	  { start: "a", end: "b" },
+	]
+	it("Should reach b", function () {
+		Test.assertEquals(solve_graph("a", "b", arcs), true);
+	});
+	it("Should never reach c", function () {
+		Test.assertEquals(solve_graph("a", "c", arcs), false);
+	});
+	it("Should reach start state", function () {
+		Test.assertEquals(solve_graph("a", "a", arcs), true);
+	});
+});
+
+describe("Complex graph with loops and intermediary nodes", function () {
+	var arcs = [
+	  { start: "a", end: "b" },
+	  { start: "b", end: "c" },
+	  { start: "c", end: "a" },
+	  { start: "c", end: "d" },
+	  { start: "e", end: "a" }
+	];
+	it("Should reach d", function () {
+		Test.assertEquals(solve_graph("a", "d", arcs), true);
+	});
+	it("Should never reach nodes with no arcs leading to it", function () {
+		Test.assertEquals(solve_graph("a", "e", arcs), false);
+	});
+	it("Should reach all nodes in a loop", function () {
+		Test.assertEquals(solve_graph("a", "a", arcs), true);
+		Test.assertEquals(solve_graph("a", "b", arcs), true);
+		Test.assertEquals(solve_graph("a", "c", arcs), true);
+	});
+});
+
+
