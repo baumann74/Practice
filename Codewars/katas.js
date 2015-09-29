@@ -1106,3 +1106,19 @@ describe("Complex graph with loops and intermediary nodes", function () {
 });
 
 
+// ********************************************************
+// http://www.codewars.com/kata/53e5274b68cee4114c0001ae/train/javascript
+// Towers of Hanio
+
+function hanoi(disks) {
+	
+	function hanoi_helper(diskCount, from, to, inter) {
+		if (diskCount == 1) return [[from, to]];
+		return hanoi_helper(diskCount - 1, from, inter, to).concat([[from, to]]).concat(hanoi_helper(diskCount - 1, inter, to, from));
+	}
+
+	return hanoi_helper(disks, 1, 3, 2);
+}
+
+//Test.assertSimilar(hanoi(1), [[1, 3]]);
+Test.assertSimilar(hanoi(2), [[1, 2], [1, 3], [2, 3]]);
