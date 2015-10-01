@@ -1,24 +1,25 @@
 ﻿using LeetCode;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace LeetCodeTest
 {
-	[TestClass]
+	[TestFixture]
 	public class LeetCodeTests
 	{
-		[TestMethod]
-		public void ZigZagConversionTest()
+		[TestCase("PAHNAPLSIIGYIR", "PAYPALISHIRING", 3)]
+		[TestCase("A", "A", 1)]
+		public void ZigZagConversionTest(string expected, string input, int rows)
 		{
 			var solution = new ZigZagConversion();
-			Assert.AreEqual("PAHNAPLSIIGYIR", solution.Convert("PAYPALISHIRING", 3));
+			Assert.AreEqual(expected, solution.Convert(input, rows));
 		}
 
-		[TestMethod]
-		public void ZigZagConversionTest1()
+		[TestCase]
+		public void CourseScheduleTest()
 		{
-			var solution = new ZigZagConversion();
-			Assert.AreEqual("A", solution.Convert("A", 1));
+			var solution = new CourseSchedule();
+			Assert.AreEqual(true, solution.CanFinish(2, new[,] { { 1, 0 } }));
+			Assert.AreEqual(false, solution.CanFinish(2, new[,] { { 1, 0 }, { 0, 1 } })); 
 		}
-
 	}
 }
