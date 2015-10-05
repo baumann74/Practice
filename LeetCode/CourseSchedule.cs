@@ -12,7 +12,7 @@ namespace LeetCode
 		public bool CanFinish(int numCourses, int[,] prerequisites)
 		{
 			nodes = new Node[numCourses].Select(x => new Node()).ToArray();
-			for (var i = 0; i < prerequisites.Length; i++)
+			for (var i = 0; i < prerequisites.GetLength(0); i++)
 			{
 				nodes[prerequisites[i, 0]].Outgoing.Add(prerequisites[i, 1]);
 				nodes[prerequisites[i, 1]].Incoming.Add(prerequisites[i, 0]);
@@ -24,17 +24,22 @@ namespace LeetCode
 				hasCycle = Visit(unMarkedNode);
 				unMarkedNode = nodes.FirstOrDefault(x => !x.HasMark);
 			}
-			return hasCycle;
+			return !hasCycle;
 		}
 
 		private bool Visit(Node node)
 		{
 			if (node.HasTempMark) return true;
 			if (node.HasMark) return false;
-			var result = node.Outgoing.Aggregate(false, (current, sibling) => current || Visit(nodes[sibling]));
+			node.HasTempMark = true;
+			foreach (var outNode in node.Outgoing)
+			{
+				var outNodeResult = Visit(nodes[outNode]);
+				if (outNodeResult) return true;
+			}
 			node.HasMark = true;
 			node.HasTempMark = false;
-			return result;
+			return false;
 		}
 
 		private class Node
