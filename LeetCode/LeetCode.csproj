@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseSchedule.cs" />
+    <Compile Include="LowestCommonAncestorSolver.cs" />
+    <Compile Include="TreeNode.cs" />
     <Compile Include="ZigZagConversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
