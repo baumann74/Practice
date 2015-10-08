@@ -1108,7 +1108,7 @@ describe("Complex graph with loops and intermediary nodes", function () {
 
 // ********************************************************
 // http://www.codewars.com/kata/53e5274b68cee4114c0001ae/train/javascript
-// Towers of Hanio
+// Towers of Hanoi
 
 function hanoi(disks) {
 	
@@ -1122,3 +1122,80 @@ function hanoi(disks) {
 
 //Test.assertSimilar(hanoi(1), [[1, 3]]);
 Test.assertSimilar(hanoi(2), [[1, 2], [1, 3], [2, 3]]);
+
+// ********************************************************
+// http://www.codewars.com/kata/did-i-finish-my-sudoku
+// Did I finish my sodoku
+
+function doneOrNot(board) {
+	var i, column;
+	for (i = 0; i < 8; i++) {
+		if (!checkList(board[i].slice())) return "Try again!";
+	}
+	for (i = 0; i < 8; i++) {
+		column = BuildColumnList(i);
+		if (!checkList(column)) return "Try again!";
+	}
+
+	for (i = 0; i < 3; i++) {
+		for (var m = 0; m < 3; m++) {
+			column = buildCubeList(i, m);
+			if (!checkList(column)) return "Try again!";
+		}
+	}
+
+	return "Finished!";
+
+	function BuildColumnList(index) {
+		var columnList = [];
+		for (var j = 0; j < 9; j++) {
+			columnList.push(board[j][index]);
+		}
+		return columnList;
+	}
+
+	function buildCubeList(row, col) {
+		var list = [];
+		for (var j = 0; j < 3; j++) {
+			for (var k = 0; k < 3; k++) {
+				list.push(board[row * 3 + j][col * 3 + k]);
+			}
+		}
+		return list;
+	}
+
+	function checkList(list) {
+//		return list.sort().join('') == '123456789'; // This does the same as below.
+		var resultList = new Array(9);
+		resultList.map(function() {
+			return false;
+		});
+		list.forEach(function(e) {
+			resultList[e] = true;
+		});
+		for (var j = 1; j <= 9; j++) {
+			if (!resultList[j]) return false;
+		}
+		return true;
+	}
+}
+
+Test.assertEquals(doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2],
+						 [6, 7, 2, 1, 9, 5, 3, 4, 8],
+						 [1, 9, 8, 3, 4, 2, 5, 6, 7],
+						 [8, 5, 9, 7, 6, 1, 4, 2, 3],
+						 [4, 2, 6, 8, 5, 3, 7, 9, 1],
+						 [7, 1, 3, 9, 2, 4, 8, 5, 6],
+						 [9, 6, 1, 5, 3, 7, 2, 8, 4],
+						 [2, 8, 7, 4, 1, 9, 6, 3, 5],
+						 [3, 4, 5, 2, 8, 6, 1, 7, 9]]), "Finished!");
+
+Test.assertEquals(doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2],
+						 [6, 7, 2, 1, 9, 0, 3, 4, 9],
+						 [1, 0, 0, 3, 4, 2, 5, 6, 0],
+						 [8, 5, 9, 7, 6, 1, 0, 2, 0],
+						 [4, 2, 6, 8, 5, 3, 7, 9, 1],
+						 [7, 1, 3, 9, 2, 4, 8, 5, 6],
+						 [9, 0, 1, 5, 3, 7, 2, 1, 4],
+						 [2, 8, 7, 4, 1, 9, 6, 3, 5],
+						 [3, 0, 0, 4, 8, 1, 1, 7, 9]]), "Try again!");
