@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Buttons.html" />
     <Content Include="framework.js" />
     <Content Include="KataJavascript.html" />
     <Content Include="katas.js" />

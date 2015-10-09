@@ -1199,3 +1199,55 @@ Test.assertEquals(doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2],
 						 [9, 0, 1, 5, 3, 7, 2, 1, 4],
 						 [2, 8, 7, 4, 1, 9, 6, 3, 5],
 						 [3, 0, 0, 4, 8, 1, 1, 7, 9]]), "Try again!");
+
+
+
+// ********************************************************
+// http://www.codewars.com/kata/52bc74d4ac05d0945d00054e/train/javascript
+// First non-repeating letter.
+
+function firstNonRepeatingLetter(s) {
+	var map = {}, nonRepeating;
+
+	if (s.length === 0) return '';
+
+	s.split('').forEach(function (c, index) {
+		if (map[c.toUpperCase()]) {
+			map[c.toUpperCase()].count++;
+		} else {
+			map[c.toUpperCase()] = { value: c, index: index, count: 1 };
+		} 
+	});
+
+	nonRepeating = Object.keys(map)
+		.map(function(m) { return map[m]; })
+		.filter(function(e) { return e.count == 1; })
+		.sort(function(a, b) { return a.index - b.index; })
+		.slice(0, 1)[0];
+	return (nonRepeating) ? nonRepeating.value : '';
+}
+
+/*
+A better solution. Find all letters where the location of the first occurence is equals to the last. This will
+give all non-repeating letter. Take the first. If the list is empty then return ''.
+
+function firstNonRepeatingLetter(s) {
+	var lowerCased = s.toLowerCase();
+	return s.split('').filter(function (c, idx) {
+		c = c.toLowerCase();
+		return (lowerCased.lastIndexOf(c) === idx) && (lowerCased.indexOf(c) === idx);
+	})[0] || '';
+}*/
+
+
+Test.describe('Simple Tests', function () {
+	it('should handle simple tests', function () {
+		Test.assertEquals(firstNonRepeatingLetter(''), '');
+		Test.assertEquals(firstNonRepeatingLetter('a'), 'a');
+		Test.assertEquals(firstNonRepeatingLetter('stress'), 't');
+		Test.assertEquals(firstNonRepeatingLetter('moonmen'), 'e');
+		Test.assertEquals(firstNonRepeatingLetter('sTreSS'), 'T');
+		Test.assertEquals(firstNonRepeatingLetter('aaaAAaaA'), '');
+		Test.assertEquals(firstNonRepeatingLetter('abcdabcd'), '');
+	});
+});
