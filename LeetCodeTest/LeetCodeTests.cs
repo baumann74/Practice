@@ -64,5 +64,48 @@ namespace LeetCodeTest
 
 			Assert.AreEqual(node1, solver.LowestCommonAncestor(node1, node3, node2));
 		}
+
+		[TestCase]
+		public void ValidateBinarySearchTree_true()
+		{
+			var node2 = new TreeNode(2);
+			var node4 = new TreeNode(4);
+			var node6 = new TreeNode(6);
+			var node3 = new TreeNode(3) {left = node2, right = node4};
+			var node7 = new TreeNode(7) {left = node6};
+			var node5 = new TreeNode(5) {left = node3, right = node7};
+
+
+			var solver = new ValidateBinarySearchTree();
+
+			Assert.AreEqual(true, solver.IsValidBST(node5));
+		}
+
+		[TestCase]
+		public void ValidateBinarySearchTree_false1()
+		{
+			var node2 = new TreeNode(2);
+			var node6 = new TreeNode(6);
+			var node7 = new TreeNode(7);
+			var node3 = new TreeNode(3) { left = node2, right = node6 };
+			var node8 = new TreeNode(8) { left = node7 };
+			var node5 = new TreeNode(5) { left = node3, right = node8 };
+
+			var solver = new ValidateBinarySearchTree();
+
+			Assert.AreEqual(false, solver.IsValidBST(node5));
+		}
+
+		[TestCase]
+		public void ValidateBinarySearchTree_false2()
+		{
+			var node1 = new TreeNode(-2147483648);
+			var node2 = new TreeNode(-2147483648) {left = node1};
+
+			var solver = new ValidateBinarySearchTree();
+
+			Assert.AreEqual(false, solver.IsValidBST(node2));
+		}
+
 	}
 }
