@@ -42,6 +42,7 @@
     <Compile Include="CourseSchedule.cs" />
     <Compile Include="LowestCommonAncestorSolver.cs" />
     <Compile Include="MaximalSquareSolver.cs" />
+    <Compile Include="SymmetricTree.cs" />
     <Compile Include="TreeNode.cs" />
     <Compile Include="ValidateBinarySearchTree.cs" />
     <Compile Include="ZigZagConversion.cs" />

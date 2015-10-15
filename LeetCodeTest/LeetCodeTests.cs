@@ -182,5 +182,63 @@ namespace LeetCodeTest
 
 			Assert.AreEqual(9, solver.MaximalSquare(matrix));
 		}
+
+		[TestCase]
+		public void IsSymmetric1()
+		{
+			var node3l = new TreeNode(3);
+			var node4l = new TreeNode(4);
+			var node2l = new TreeNode(2) {left = node3l, right = node4l};
+			var node3r = new TreeNode(3);
+			var node4r = new TreeNode(4);
+			var node2r = new TreeNode(2) { left = node4r, right = node3r };
+			var node1 = new TreeNode(1) {left = node2l, right = node2r};
+
+			var solver = new SymmetricTree();
+
+			Assert.AreEqual(true, solver.IsSymmetric(node1));
+		}
+
+		[TestCase]
+		public void IsSymmetric2()
+		{
+			var node3l = new TreeNode(3);
+			var node2l = new TreeNode(2) { right = node3l };
+			var node3r = new TreeNode(3);
+			var node2r = new TreeNode(2) { right = node3r};
+			var node1 = new TreeNode(1) { left = node2l, right = node2r };
+
+			var solver = new SymmetricTree();
+
+			Assert.AreEqual(false, solver.IsSymmetric(node1));
+		}
+
+//		[TestCase]
+//		public void IsSymmetric3()
+//		{
+//			var node3l = new TreeNode(3);
+//			var node2l = new TreeNode(2) { left = node3l, right = null };
+//			var node2r = new TreeNode(2);
+//			var node3r = new TreeNode(3) { left = node2r, right = null };
+//			var node1 = new TreeNode(1) { left = node2l, right = node3r };
+//
+//			var solver = new SymmetricTree();
+//
+//			Assert.AreEqual(false, solver.IsSymmetric(node1));
+//		}
+
+//		[TestCase]
+//		public void IsSymmetric4()
+//		{
+//			var node2ll = new TreeNode(2);
+//			var node2l = new TreeNode(2) { left = node2ll, right = null };
+//			var node2r = new TreeNode(2);
+//			var node3r = new TreeNode(3) { left = node2r, right = null };
+//			var node1 = new TreeNode(1) { left = node2l, right = node3r };
+//
+//			var solver = new SymmetricTree();
+//
+//			Assert.AreEqual(false, solver.IsSymmetric(node1));
+//		}
 	}
 }
