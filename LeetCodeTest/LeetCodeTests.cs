@@ -18,8 +18,8 @@ namespace LeetCodeTest
 		public void CourseScheduleTest()
 		{
 			var solution = new CourseSchedule();
-			Assert.AreEqual(true, solution.CanFinish(2, new[,] { { 1, 0 } }));
-			Assert.AreEqual(false, solution.CanFinish(2, new[,] { { 1, 0 }, { 0, 1 } })); 
+			Assert.AreEqual(true, solution.CanFinish(2, new[,] {{1, 0}}));
+			Assert.AreEqual(false, solution.CanFinish(2, new[,] {{1, 0}, {0, 1}}));
 		}
 
 		[TestCase]
@@ -47,7 +47,7 @@ namespace LeetCodeTest
 			var node2 = new TreeNode(2);
 			var node3 = new TreeNode(3);
 
-			var node1 = new TreeNode(1) { left = node2, right = node3 };
+			var node1 = new TreeNode(1) {left = node2, right = node3};
 			var solver = new LowestCommonAncestorSolver();
 
 			Assert.AreEqual(node1, solver.LowestCommonAncestor(node1, node2, node3));
@@ -59,7 +59,7 @@ namespace LeetCodeTest
 			var node2 = new TreeNode(2);
 			var node3 = new TreeNode(3);
 
-			var node1 = new TreeNode(1) { left = node2, right = node3 };
+			var node1 = new TreeNode(1) {left = node2, right = node3};
 			var solver = new LowestCommonAncestorSolver();
 
 			Assert.AreEqual(node1, solver.LowestCommonAncestor(node1, node3, node2));
@@ -87,9 +87,9 @@ namespace LeetCodeTest
 			var node2 = new TreeNode(2);
 			var node6 = new TreeNode(6);
 			var node7 = new TreeNode(7);
-			var node3 = new TreeNode(3) { left = node2, right = node6 };
-			var node8 = new TreeNode(8) { left = node7 };
-			var node5 = new TreeNode(5) { left = node3, right = node8 };
+			var node3 = new TreeNode(3) {left = node2, right = node6};
+			var node8 = new TreeNode(8) {left = node7};
+			var node5 = new TreeNode(5) {left = node3, right = node8};
 
 			var solver = new ValidateBinarySearchTree();
 
@@ -107,5 +107,80 @@ namespace LeetCodeTest
 			Assert.AreEqual(false, solver.IsValidBST(node2));
 		}
 
+		[TestCase]
+		public void MaximalSquare1()
+		{
+			var matrix = new [,]
+			{
+				{'1', '0', '1', '0', '0'},
+				{'1', '0', '1', '1', '1'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '0', '1', '1', '0'},
+			};
+			var solver = new MaximalSquareSolver();
+
+			Assert.AreEqual(4, solver.MaximalSquare(matrix));
+		}
+
+		[TestCase]
+		public void MaximalSquare2()
+		{
+			var matrix = new[,]
+			{
+				{'1', '1', '1', '0', '0'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '0', '1', '1', '0'},
+			};
+			var solver = new MaximalSquareSolver();
+
+			Assert.AreEqual(9, solver.MaximalSquare(matrix));
+		}
+
+		[TestCase]
+		public void MaximalSquare3()
+		{
+			var matrix = new[,]
+			{
+				{'0', '0', '1', '0', '0'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '0', '1', '0', '1'},
+				{'1', '0', '1', '1', '0'},
+			};
+			var solver = new MaximalSquareSolver();
+
+			Assert.AreEqual(1, solver.MaximalSquare(matrix));
+		}
+
+		[TestCase]
+		public void MaximalSquare4()
+		{
+			var matrix = new[,]
+			{
+				{'1', '1', '1', '1', '0'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '1', '1', '1', '1'},
+				{'1', '1', '1', '1', '0'},
+			};
+			var solver = new MaximalSquareSolver();
+
+			Assert.AreEqual(16, solver.MaximalSquare(matrix));
+		}
+
+		[TestCase]
+		public void MaximalSquare5()
+		{
+			var matrix = new[,]
+			{
+				{'0', '0', '0', '1'},
+				{'1', '1', '0', '1'},
+				{'1', '1', '1', '1'},
+				{'0', '1', '1', '1'},
+				{'0', '1', '1', '1'}
+			};
+			var solver = new MaximalSquareSolver();
+
+			Assert.AreEqual(9, solver.MaximalSquare(matrix));
+		}
 	}
 }

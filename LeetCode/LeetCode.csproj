@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CourseSchedule.cs" />
     <Compile Include="LowestCommonAncestorSolver.cs" />
+    <Compile Include="MaximalSquareSolver.cs" />
     <Compile Include="TreeNode.cs" />
     <Compile Include="ValidateBinarySearchTree.cs" />
     <Compile Include="ZigZagConversion.cs" />
