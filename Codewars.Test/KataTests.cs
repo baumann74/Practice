@@ -124,6 +124,7 @@ namespace Codewars.Test
 			}
 		}
 
+		[TestFixture]
 		public class IQTests
 		{
 			[Test]
@@ -139,6 +140,7 @@ namespace Codewars.Test
 			}
 		}
 
+		[TestFixture]
 		public class StairsTests
 		{
 			[Test]
@@ -154,6 +156,7 @@ namespace Codewars.Test
 			}
 		}
 
+		[TestFixture]
 		public class SqInRectTests
 		{
 
@@ -170,6 +173,7 @@ namespace Codewars.Test
 			}
 		}
 
+		[TestFixture]
 		public class CountingChangeCombinationsTests
 		{
 
@@ -190,6 +194,64 @@ namespace Codewars.Test
 			{
 				Assert.AreEqual(0, Kata.CountingChangeCombinations.CountCombinations(11, new[] { 5, 7 }));
 			}
+		}
+
+		[TestFixture]
+		public class InvertBinaryTestClass
+		{
+			[Test]
+			public void TestFromExample()
+			{
+				var root1 = new TreeNode
+				{
+					Value = 4,
+					Left = new TreeNode
+					{
+						Value = 2,
+						Left = new TreeNode { Value = 1 },
+						Right = new TreeNode { Value = 3 }
+					},
+					Right = new TreeNode
+					{
+						Value = 7,
+						Left = new TreeNode { Value = 6 },
+						Right = new TreeNode { Value = 9 }
+					}
+				};
+
+				var root2 = new TreeNode
+				{
+					Value = 4,
+					Left = new TreeNode
+					{
+						Value = 7,
+						Left = new TreeNode { Value = 9 },
+						Right = new TreeNode { Value = 6 }
+					},
+					Right = new TreeNode
+					{
+						Value = 2,
+						Left = new TreeNode { Value = 3 },
+						Right = new TreeNode { Value = 1 }
+					}
+				};
+
+				CompareTrees(Kata.InvertTreeClass.InvertTree(root1), root2);
+			}
+
+			private static void CompareTrees(TreeNode root1, TreeNode root2)
+			{
+				if (root1 == null && root2 == null)
+					return;
+
+				Assert.False(root1 == null && root2 != null);
+				Assert.False(root1 != null && root2 == null);
+				Assert.AreEqual(root1.Value, root2.Value);
+
+				CompareTrees(root1.Left, root2.Left);
+				CompareTrees(root1.Right, root2.Right);
+			}
+
 		}
 	}
 }

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Kata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Buttons.html" />

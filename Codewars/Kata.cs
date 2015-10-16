@@ -216,6 +216,7 @@ namespace Codewars
 		}
 
 
+		// ********************************************************
 		// http://www.codewars.com/kata/541af676b589989aed0009e7
 
 
@@ -243,6 +244,24 @@ namespace Codewars
 					CountCombinationsHelper(money, coins, index, sum + coins[index]) +
 				       CountCombinationsHelper(money, coins, index + 1, sum);
 				return cache[index, sum];
+			}
+		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/541af676b589989aed0009e7
+		// Invert binary tree
+
+		public static class InvertTreeClass
+		{
+			public static TreeNode InvertTree(TreeNode root)
+			{
+				if (root == null) return null;
+				return new TreeNode()
+				{
+					Value = root.Value, 
+					Left = InvertTree(root.Right), 
+					Right = InvertTree(root.Left)
+				};
 			}
 		}
 	}
