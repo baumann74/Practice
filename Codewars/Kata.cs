@@ -9,6 +9,8 @@ namespace Codewars
 
 	public class Kata
 	{
+
+		// ********************************************************
 		// http://www.codewars.com/kata/5299413901337c637e000004/train/csharp
 
 		public static int GetMissingElement(int[] superImportantArray)
@@ -16,6 +18,8 @@ namespace Codewars
 			return Enumerable.Range(0, 9).Except(superImportantArray).First();
 		}
 
+
+		// ********************************************************
 		// http://www.codewars.com/kata/514b92a657cdc65150000006/train/csharp
 
 		public static int MultipleOf3And5(int value)
@@ -23,6 +27,8 @@ namespace Codewars
 			return Enumerable.Range(0, value).Where(x => x%3 == 0 || x%5 == 0).Sum();
 		}
 
+
+		// ********************************************************
 		// http://www.codewars.com/kata/52761ee4cffbc69732000738/train/csharp
 
 		public static string GoodVsEvil(string good, string evil)
@@ -57,6 +63,8 @@ namespace Codewars
 				: "Battle Result: Evil eradicates all trace of Good";
 		}
 
+
+		// ********************************************************
 		// http://www.codewars.com/kata/55003f75bae8cd78d200127b/train/csharp
 
 		public static bool IsPalindrome(string w)
@@ -64,6 +72,7 @@ namespace Codewars
 			var list = w.Trim().Where(Char.IsLetterOrDigit).Select(Char.ToLower).ToArray();
 			return list.Reverse().SequenceEqual(list);
 		}
+
 
 		// http://www.codewars.com/kata/palindrome-chain-length/train/csharp
 
@@ -127,6 +136,8 @@ namespace Codewars
 				.Single();
 		}
 
+
+		// ********************************************************
 		// http://www.codewars.com/kata/55251c0d2142d7b4ab000aef/train/csharp
 
 		public class NumberOfStepsImpl
@@ -175,6 +186,7 @@ namespace Codewars
 		}
 
 
+		// ********************************************************
 		// http://www.codewars.com/kata/decode-the-morse-code/train/csharp
 
 		public class MorseCodeDecoder
@@ -242,10 +254,11 @@ namespace Codewars
 				}
 				cache[index, sum] = 
 					CountCombinationsHelper(money, coins, index, sum + coins[index]) +
-				       CountCombinationsHelper(money, coins, index + 1, sum);
+					   CountCombinationsHelper(money, coins, index + 1, sum);
 				return cache[index, sum];
 			}
 		}
+
 
 		// ********************************************************
 		// http://www.codewars.com/kata/541af676b589989aed0009e7
@@ -262,6 +275,82 @@ namespace Codewars
 					Left = InvertTree(root.Right), 
 					Right = InvertTree(root.Left)
 				};
+			}
+		}
+
+		public class RomanDecode
+		{
+			private static readonly Dictionary<string, int> RomanNumeralMap = new Dictionary<string, int>
+			{
+				{ "M", 1000 },
+				{ "CM", 900 },
+				{ "D", 500 },
+				{ "CD", 400 },
+				{ "C", 100 },
+				{ "XC", 90 },
+				{ "L", 50 },
+				{ "XL", 40 },
+				{ "X", 10 },
+				{ "IX", 9 },
+				{ "V", 5 },
+				{ "IV", 4 },
+				{ "I", 1 },
+			};
+
+			public static int Solution(string roman)
+			{
+				var result = 0;
+				var index = 0;
+				while (index < roman.Length)
+				{
+					int value;
+					if (index <= roman.Length - 2 && RomanNumeralMap.TryGetValue(roman.Substring(index, 2), out value))
+					{
+						result = result + value;
+						index = index + 2;
+					}
+					else
+					{
+						result = result + RomanNumeralMap[roman[index++].ToString()];
+					}
+				}
+				return result;
+			}
+		}
+
+		public class RomanDecodeBetter
+		{
+			private static readonly Dictionary<char, int> Literals = new Dictionary<char, int>
+			{
+				{'I', 1},
+				{'V', 5},
+				{'X', 10},
+				{'L', 50},
+				{'C', 100},
+				{'D', 500},
+				{'M', 1000}
+			};
+
+			public static int Solution(string roman)
+			{
+				var result = 0;
+				var previous = 0;
+
+				foreach (var c in roman.Reverse())
+				{
+					int value = Literals[c];
+
+					if (value < previous)
+					{
+						result -= value;
+					}
+					else
+					{
+						result += value;
+						previous = value;
+					}
+				}
+				return result;
 			}
 		}
 	}

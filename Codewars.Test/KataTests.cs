@@ -251,7 +251,22 @@ namespace Codewars.Test
 				CompareTrees(root1.Left, root2.Left);
 				CompareTrees(root1.Right, root2.Right);
 			}
+		}
 
+		[TestFixture]
+		public class RomanDecodeTests
+		{
+			[TestCase(1, "I")]
+			[TestCase(2, "II")]
+			[TestCase(4, "IV")]
+			[TestCase(707, "DCCVII")]
+			[TestCase(1990, "MCMXC")]
+			[TestCase(2008, "MMVIII")]
+			[TestCase(1666, "MDCLXVI")]
+			public void Test(int expected, string roman)
+			{
+				Assert.AreEqual(expected, Kata.RomanDecode.Solution(roman));
+			}
 		}
 	}
 }
