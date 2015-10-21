@@ -1287,3 +1287,37 @@ Test.assertEquals(romanNumeralEncoder(1990), "MCMXC");
 Test.assertEquals(romanNumeralEncoder(2008), "MMVIII");
 Test.assertEquals(romanNumeralEncoder(1666), "MDCLXVI");
 
+var maxSequence = function (arr) {
+	var max = 0, sum = 0, value;
+	for (var i = 0; i < arr.length; i++) {
+		value = arr[i];
+		sum = sum + value;
+		if (sum < 0) {
+			sum = 0;
+		}
+		if (sum > max) {
+			max = sum;
+		}
+	}
+	return max;
+}
+
+/*
+Use of reduce.
+var maxSequence = function(arr){
+	var currentSum = 0;
+	return arr.reduce(function(maxSum, number){
+		currentSum = Math.max(currentSum+number, 0);
+		return Math.max(currentSum, maxSum);
+	}, 0);
+}
+*/
+
+describe("maxSequence", function () {
+	it("should work on an empty array", function () {
+		Test.assertEquals(maxSequence([]), 0);
+	});
+	it("should work on the example", function () {
+		Test.assertEquals(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
+	});
+});

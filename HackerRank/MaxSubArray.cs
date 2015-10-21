@@ -4,7 +4,6 @@ namespace HackerRank
 {
 	public class MaxSubArray
 	{
-
 		public static int Solve_contiguous(int n, int[] list)
 		{
 			var max_continue = 0;
