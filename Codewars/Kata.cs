@@ -278,6 +278,10 @@ namespace Codewars
 			}
 		}
 
+		// ********************************************************
+		//http://www.codewars.com/kata/51b6249c4612257ac0000005
+		// Roman decoder
+
 		public class RomanDecode
 		{
 			private static readonly Dictionary<string, int> RomanNumeralMap = new Dictionary<string, int>
@@ -351,6 +355,43 @@ namespace Codewars
 					}
 				}
 				return result;
+			}
+		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/square-into-squares-protect-trees/train/csharp
+		// Square into Squares. Protect trees!
+
+		public class Decompose
+		{
+
+			public string decompose(long n)
+			{
+				var list = new List<long>();
+				DecomposeHelper(n * n, n - 1, list);
+				list.Reverse();
+				return list.Any() ? string.Join(" ", list) : null;
+			}
+
+			private static bool DecomposeHelper(long n, long value, List<long> list)
+			{
+				if (n == 0) return true;
+				if (n == 1 && !list.Contains(1))
+				{
+					list.Add(1);
+					return true;
+				}
+				if (new[] {2L, 3L}.Contains(n)) return false;
+				for (var i = value; i > 0; i--)
+				{
+					if (list.Contains(i)) return false;
+					list.Add(i);
+					var nextN = n - (i*i);
+					var works = DecomposeHelper(nextN, (long)Math.Floor(Math.Sqrt(nextN)), list);
+					if (works) return true;
+					list.Remove(i);
+				}
+				return false;
 			}
 		}
 	}

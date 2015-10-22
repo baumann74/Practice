@@ -268,5 +268,19 @@ namespace Codewars.Test
 				Assert.AreEqual(expected, Kata.RomanDecode.Solution(roman));
 			}
 		}
+
+		[TestFixture]
+		public class DecomposeTests
+		{
+
+			[Test]
+			public void Test1()
+			{
+				var d = new Kata.Decompose();
+				Assert.AreEqual("1 2 4 10", d.decompose(11));
+				Assert.AreEqual("1 3 5 8 49", d.decompose(50));
+				Assert.AreEqual(null, d.decompose(4));
+			}
+		}
 	}
 }
