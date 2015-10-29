@@ -282,5 +282,60 @@ namespace Codewars.Test
 				Assert.AreEqual(null, d.decompose(4));
 			}
 		}
+
+		[TestFixture]
+		public class BraceTests
+		{
+
+			[Test]
+			public void Test1()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("()"), true);
+			}
+
+			[Test]
+			public void Test2()
+			{
+
+				Assert.AreEqual(Kata.Brace.validBraces("[(])"), false);
+			}
+
+			[Test]
+			public void Test3()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("(){}[]"), true);
+			}
+
+			[Test]
+			public void Test4()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("([{}])"), true);
+			}
+
+			[Test]
+			public void Test5()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("[({})](]"), false);
+			}
+
+			[Test]
+			public void Test6()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("(}"), false);
+			}
+
+			[Test]
+			public void Test7()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("}"), false);
+			}
+
+			[Test]
+			public void Test8()
+			{
+				Assert.AreEqual(Kata.Brace.validBraces("[][][]"), true);
+			}
+
+		}
 	}
 }

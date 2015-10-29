@@ -394,5 +394,45 @@ namespace Codewars
 				return false;
 			}
 		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/csharp
+		// alid Braces.
+
+		public class Brace
+		{
+			private static readonly char[] Start = { '(', '{', '[' };
+			private static readonly Stack<char> Stack = new Stack<char>();
+
+			public static bool validBraces(String braces)
+			{
+				var chars = braces.ToCharArray();
+				foreach (var c in chars)
+				{
+					if (Start.Contains(c))
+					{
+						Stack.Push(c);
+					}
+					else
+					{
+						var isCorrect = Stack.Any() && IsMatch(Stack.Pop(), c);
+						if (!isCorrect) return false;
+					}
+				}
+				return true;
+			}
+
+			private static bool IsMatch(char start, char end)
+			{
+				switch (end)
+				{
+					case ')' :return start == '(';
+					case '}': return start == '{';
+					case ']': return start == '[';
+					default:
+						throw new Exception("Unknown c: " + end);
+				}
+			}
+		}
 	}
 }
