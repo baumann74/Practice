@@ -406,6 +406,8 @@ namespace Codewars
 
 			public static bool validBraces(String braces)
 			{
+				Console.WriteLine(braces);
+				Stack.Clear();
 				var chars = braces.ToCharArray();
 				foreach (var c in chars)
 				{
@@ -419,7 +421,7 @@ namespace Codewars
 						if (!isCorrect) return false;
 					}
 				}
-				return true;
+				return !Stack.Any();
 			}
 
 			private static bool IsMatch(char start, char end)

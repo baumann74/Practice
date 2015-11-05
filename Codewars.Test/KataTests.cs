@@ -290,52 +290,63 @@ namespace Codewars.Test
 			[Test]
 			public void Test1()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("()"), true);
+				Assert.AreEqual(true, Kata.Brace.validBraces("()"));
 			}
 
 			[Test]
 			public void Test2()
 			{
 
-				Assert.AreEqual(Kata.Brace.validBraces("[(])"), false);
+				Assert.AreEqual(false, Kata.Brace.validBraces("[(])"));
 			}
 
 			[Test]
 			public void Test3()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("(){}[]"), true);
+				Assert.AreEqual(true, Kata.Brace.validBraces("(){}[]"));
 			}
 
 			[Test]
 			public void Test4()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("([{}])"), true);
+				Assert.AreEqual(true, Kata.Brace.validBraces("([{}])"));
 			}
 
 			[Test]
 			public void Test5()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("[({})](]"), false);
+				Assert.AreEqual(false, Kata.Brace.validBraces("[({})](]"));
 			}
 
 			[Test]
 			public void Test6()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("(}"), false);
+				Assert.AreEqual(false, Kata.Brace.validBraces("(}"));
 			}
 
 			[Test]
 			public void Test7()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("}"), false);
+				Assert.AreEqual(false, Kata.Brace.validBraces("}"));
 			}
 
 			[Test]
 			public void Test8()
 			{
-				Assert.AreEqual(Kata.Brace.validBraces("[][][]"), true);
+				Assert.AreEqual(true, Kata.Brace.validBraces("[][][]"));
 			}
 
+			[Test]
+			public void Test9()
+			{
+				Assert.AreEqual(false, Kata.Brace.validBraces("}}]]))}])"));
+			}
+
+			[Test]
+			public void Test10()
+			{
+				Assert.AreEqual(false, Kata.Brace.validBraces("(((({{"));
+			}
 		}
 	}
 }
