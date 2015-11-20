@@ -213,32 +213,11 @@ namespace LeetCodeTest
 			Assert.AreEqual(false, solver.IsSymmetric(node1));
 		}
 
-//		[TestCase]
-//		public void IsSymmetric3()
-//		{
-//			var node3l = new TreeNode(3);
-//			var node2l = new TreeNode(2) { left = node3l, right = null };
-//			var node2r = new TreeNode(2);
-//			var node3r = new TreeNode(3) { left = node2r, right = null };
-//			var node1 = new TreeNode(1) { left = node2l, right = node3r };
-//
-//			var solver = new SymmetricTree();
-//
-//			Assert.AreEqual(false, solver.IsSymmetric(node1));
-//		}
+		[TestCase(38, 2)]
+		public void AddDigits(int input, int expected)
+		{
+			Assert.AreEqual(expected, AddDigitsSolver.AddDigits(input));
+		}
 
-//		[TestCase]
-//		public void IsSymmetric4()
-//		{
-//			var node2ll = new TreeNode(2);
-//			var node2l = new TreeNode(2) { left = node2ll, right = null };
-//			var node2r = new TreeNode(2);
-//			var node3r = new TreeNode(3) { left = node2r, right = null };
-//			var node1 = new TreeNode(1) { left = node2l, right = node3r };
-//
-//			var solver = new SymmetricTree();
-//
-//			Assert.AreEqual(false, solver.IsSymmetric(node1));
-//		}
 	}
 }

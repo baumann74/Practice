@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddDigitsSolver.cs" />
     <Compile Include="CourseSchedule.cs" />
     <Compile Include="LowestCommonAncestorSolver.cs" />
     <Compile Include="MaximalSquareSolver.cs" />
