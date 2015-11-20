@@ -348,5 +348,15 @@ namespace Codewars.Test
 				Assert.AreEqual(false, Kata.Brace.validBraces("(((({{"));
 			}
 		}
+
+		[TestFixture]
+		public class SumStringsTest
+		{
+			[Test]
+			public void test()
+			{
+				Assert.AreEqual("579", Kata.KataSumString.SumStrings("123", "456"));
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿
 
 using System.Linq;
+using System.Numerics;
 
 namespace Codewars
 {
@@ -397,7 +398,7 @@ namespace Codewars
 
 		// ********************************************************
 		// http://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/csharp
-		// alid Braces.
+		// Valid Braces.
 
 		public class Brace
 		{
@@ -434,6 +435,28 @@ namespace Codewars
 					default:
 						throw new Exception("Unknown c: " + end);
 				}
+			}
+		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/5324945e2ece5e1f32000370/train/csharp
+		// Sum Strings as Numbers.
+
+
+		public static class KataSumString
+		{
+			public static string SumStrings(string a, string b)
+			{
+				BigInteger number1;
+				BigInteger number2;
+				var s1 = BigInteger.TryParse(a, out number1);
+				var s2 = BigInteger.TryParse(b, out number2);
+				number1 = s1 ? number1 : 0;
+				number2 = s2 ? number2 : 0;
+				var number = number1 + number2;
+				return number.ToString();
+				// Better 
+				//return (Convert.ToInt32(a) + Convert.ToInt32(b)).ToString();
 			}
 		}
 	}
