@@ -1,12 +1,10 @@
-﻿
-
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
 namespace Codewars
 {
-	using System;
-	using System.Collections.Generic;
 
 	public class Kata
 	{
@@ -270,7 +268,7 @@ namespace Codewars
 			public static TreeNode InvertTree(TreeNode root)
 			{
 				if (root == null) return null;
-				return new TreeNode()
+				return new TreeNode
 				{
 					Value = root.Value, 
 					Left = InvertTree(root.Right), 
@@ -457,6 +455,40 @@ namespace Codewars
 				return number.ToString();
 				// Better 
 				//return (Convert.ToInt32(a) + Convert.ToInt32(b)).ToString();
+			}
+		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/help-suzuki-count-his-vegetables-dot-dot-dot/train/csharp
+		// Help Suzuki count his vegetables....
+
+		public class Suzuki
+		{
+			public static List<Tuple<int, string>> CountVegetables(string s)
+			{
+				var vegtables = new Dictionary<string, int>
+				{
+					["cabbage"] = 0,
+					["carrot"] = 0,
+					["celery"] = 0,
+					["cucumber"] = 0,
+					["mushroom"] = 0,
+					["onion"] = 0,
+					["pepper"] = 0,
+					["potato"] = 0,
+					["tofu"] = 0,
+					["turnip"] = 0
+				};
+				s.Split(' ').Where(x => vegtables.ContainsKey(x)).ToList().ForEach(x => { vegtables[x]++; });
+				var groups = vegtables.OrderByDescending(x => x.Value).GroupBy(
+					x => x.Value,
+					x => x,
+					(key, g) => g.OrderByDescending(x => x.Key));
+				return groups.SelectMany(parent => parent, (parent, group) => new Tuple<int, string>(group.Value, group.Key)).ToList();
+
+				// Better:
+				//  string[] veggies = SuzukiHelper.Veggies; // Contains all vegetables as strings.
+				// return s.Split(' ').Where(x => veggies.Contains(x)).GroupBy(x => x).OrderByDescending(x => x.Count()).ThenByDescending(x => x.Key).Select(x => Tuple.Create(x.Count(), x.Key)).ToList();
 			}
 		}
 	}
