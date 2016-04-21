@@ -491,5 +491,25 @@ namespace Codewars
 				// return s.Split(' ').Where(x => veggies.Contains(x)).GroupBy(x => x).OrderByDescending(x => x.Count()).ThenByDescending(x => x.Key).Select(x => Tuple.Create(x.Count(), x.Key)).ToList();
 			}
 		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/5522ebbd20cc1cf7980014e7/train/csharp
+		// Vasya and Book
+
+		public class Book
+		{
+			public static int DayIs(int pages, int[] days)
+			{
+				Console.WriteLine("Pages: " + pages + "days: " + string.Join(",", days));
+				var counter = 0;
+				var remains = pages;
+				while (true)
+				{
+					remains = remains - days[counter];
+					if (remains <= 0) return counter + 1;
+					counter = (counter + 1) % 7;
+				}
+			}
+		}
 	}
 }

@@ -417,5 +417,33 @@ namespace Codewars.Test
 				Assert.AreEqual(grp2, result);
 			}
 		}
+
+		[TestFixture]
+		public class BookTests
+		{
+			[Test]
+			public void Test1()
+			{
+				var days = new[] { 15, 20, 20, 15, 10, 30, 45 };
+				var pages = 100;
+				Assert.AreEqual(6, Kata.Book.DayIs(pages, days));
+			}
+
+			[Test]
+			public void Test2()
+			{
+				var days = new[] { 1, 0, 0, 0, 0, 0, 0 };
+				var pages = 2;
+				Assert.AreEqual(1, Kata.Book.DayIs(pages, days));
+			}
+
+			[Test]
+			public void Test3()
+			{
+				var days = new[] { 109, 58, 77, 10, 39, 125, 15 };
+				var pages = 433;
+				Assert.AreEqual(7, Kata.Book.DayIs(pages, days));
+			}
+		}
 	}
 }
