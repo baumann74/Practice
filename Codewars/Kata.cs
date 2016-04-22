@@ -511,5 +511,35 @@ namespace Codewars
 				}
 			}
 		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/56e3cd1d93c3d940e50006a4/train/csharp
+		// How Green Is My Valley?
+
+		public class Valley
+		{
+
+			public static int[] MakeValley(int[] arr)
+			{
+				var leftList = new List<int>();
+				var rightList = new List<int>();
+				var inputList = arr.ToList();
+				inputList.Sort();
+				var counter = inputList.Count - 1;
+				while (counter >= 0)
+				{
+					leftList.Add(inputList[counter]);
+					counter--;
+					if (counter >= 0)
+					{
+						rightList.Add(inputList[counter]);
+					}
+					counter--;
+				}
+				rightList.Reverse();
+				leftList.AddRange(rightList);
+				return leftList.ToArray();
+			}
+		}
 	}
 }
