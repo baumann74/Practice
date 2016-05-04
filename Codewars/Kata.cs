@@ -541,5 +541,45 @@ namespace Codewars
 				return leftList.ToArray();
 			}
 		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/55c04b4cc56a697bb0000048/train/csharp
+		// Scramblies
+
+
+		public class Scramblies
+		{
+			public static bool Scramble(string str1, string str2)
+			{
+				if (str1.Length < str2.Length) return false;
+				var dict = new Dictionary<char, int>();
+				str1.ToList().ForEach(x =>
+				{
+					if (dict.ContainsKey(x))
+					{
+						dict[x]++;
+					}
+					else
+					{
+						dict[x] = 1;
+					}
+				});
+				foreach (var t in str2)
+				{
+					if (dict.ContainsKey(t) && dict[t] > 0)
+					{
+						dict[t] = dict[t] - 1;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+
+			// Clever solution
+			// return str2.All(x=>str1.Count(y=>y==x)>=str2.Count(y=>y==x));
+		}
 	}
 }

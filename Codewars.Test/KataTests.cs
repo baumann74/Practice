@@ -494,5 +494,29 @@ namespace Codewars.Test
 				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
 			}
 		}
+
+		[TestFixture]
+		public static class ScrambliesTests
+		{
+			private static void testing(bool actual, bool expected)
+			{
+				Assert.AreEqual(expected, actual);
+			}
+
+			[Test]
+			public static void test1()
+			{
+				testing(Kata.Scramblies.Scramble("rkqodlw", "world"), true);
+				testing(Kata.Scramblies.Scramble("cedewaraaossoqqyt", "codewars"), true);
+				testing(Kata.Scramblies.Scramble("katas", "steak"), false);
+				testing(Kata.Scramblies.Scramble("scriptjavx", "javascript"), false);
+				testing(Kata.Scramblies.Scramble("scriptingjava", "javascript"), true);
+				testing(Kata.Scramblies.Scramble("scriptsjava", "javascripts"), true);
+				testing(Kata.Scramblies.Scramble("javscripts", "javascript"), false);
+				testing(Kata.Scramblies.Scramble("aabbcamaomsccdd", "commas"), true);
+				testing(Kata.Scramblies.Scramble("commas", "commas"), true);
+				testing(Kata.Scramblies.Scramble("sammoc", "commas"), true);
+			}
+		}
 	}
 }
