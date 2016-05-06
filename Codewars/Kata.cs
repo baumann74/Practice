@@ -581,5 +581,46 @@ namespace Codewars
 			// Clever solution
 			// return str2.All(x=>str1.Count(y=>y==x)>=str2.Count(y=>y==x));
 		}
+
+		public class WeightSort
+		{
+			public static string orderWeight(string strng)
+			{
+				var list = strng.Split(' ').Select(x => new Weight { Value = x }).ToList();
+				list.Sort();
+				return string.Join(" ", list.Select(x => x.Value));
+			}
+
+			private class Weight : IComparable
+			{
+				public string Value { get; set; }
+
+				public int CompareTo(object obj)
+				{
+					var other = (Weight)obj;
+					var weight = GetWeight();
+					var otherWeight = other.GetWeight();
+					if (otherWeight == weight)
+					{
+						return string.Compare(Value, other.Value, StringComparison.Ordinal);
+					}
+					return (weight > otherWeight) ? 1 : -1;
+				}
+
+				private int GetWeight()
+				{
+					return Value.ToList().Sum(x => int.Parse(x.ToString()));
+				}
+			}
+
+			// Cleaver solution
+			/*
+			 return string.Join(" ", 
+				s.Split(' ')
+				.OrderBy(n => n.ToCharArray().Select(c => (int)char.GetNumericValue(c)).Sum())
+				.ThenBy(n => n));
+			*/
+		}
+
 	}
 }
