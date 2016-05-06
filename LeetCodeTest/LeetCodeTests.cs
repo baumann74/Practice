@@ -219,5 +219,32 @@ namespace LeetCodeTest
 			Assert.AreEqual(expected, AddDigitsSolver.AddDigits(input));
 		}
 
+		[TestCase]
+		public void MaximumDepthOfBinaryTree1()
+		{
+			var node1 = new TreeNode(1);
+			var solver = new MaximumDepthOfBinaryTree();
+			Assert.AreEqual(1, solver.MaxDepth(node1));
+		}
+
+		[TestCase]
+		public void MaximumDepthOfBinaryTree2()
+		{
+			var node2 = new TreeNode(2);
+			var node3 = new TreeNode(3);
+			var node1 = new TreeNode(1) { left = node2, right = node3};
+			var solver = new MaximumDepthOfBinaryTree();
+			Assert.AreEqual(2, solver.MaxDepth(node1));
+		}
+
+		[TestCase]
+		public void MaximumDepthOfBinaryTree3()
+		{
+			var node3 = new TreeNode(3);
+			var node2 = new TreeNode(2) { left = node3};
+			var node1 = new TreeNode(1) { left = node2 };
+			var solver = new MaximumDepthOfBinaryTree();
+			Assert.AreEqual(3, solver.MaxDepth(node1));
+		}
 	}
 }
