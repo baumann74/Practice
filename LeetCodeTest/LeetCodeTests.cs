@@ -246,5 +246,15 @@ namespace LeetCodeTest
 			var solver = new MaximumDepthOfBinaryTree();
 			Assert.AreEqual(3, solver.MaxDepth(node1));
 		}
+
+		[TestCase]
+		public void SingleNumber()
+		{
+			var solver = new SingleNumberSolver();
+			Assert.AreEqual(1, solver.SingleNumber(new[] {2, 2, 3, 1, 3}));
+			Assert.AreEqual(5, solver.SingleNumber(new[] {4, 4, 6, 6, 5}));
+			Assert.AreEqual(10, solver.SingleNumber(new[] {10, 2, 2, 9, 9}));
+		}
+
 	}
 }

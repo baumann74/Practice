@@ -44,6 +44,7 @@
     <Compile Include="LowestCommonAncestorSolver.cs" />
     <Compile Include="MaximalSquareSolver.cs" />
     <Compile Include="MaximumDepthOfBinaryTree.cs" />
+    <Compile Include="SingleNumberSolution.cs" />
     <Compile Include="SymmetricTree.cs" />
     <Compile Include="TreeNode.cs" />
     <Compile Include="ValidateBinarySearchTree.cs" />
