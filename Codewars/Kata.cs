@@ -582,6 +582,10 @@ namespace Codewars
 			// return str2.All(x=>str1.Count(y=>y==x)>=str2.Count(y=>y==x));
 		}
 
+		// ********************************************************
+		// http://www.codewars.com/kata/55c6126177c9441a570000cc
+		// Weight for weight
+
 		public class WeightSort
 		{
 			public static string orderWeight(string strng)
@@ -621,6 +625,12 @@ namespace Codewars
 				.ThenBy(n => n));
 			*/
 		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/517abf86da9663f1d2000003/train/csharp
+		// Convert string to camel case
+
+
 
 	}
 }
