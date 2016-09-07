@@ -626,11 +626,17 @@ namespace Codewars
 			*/
 		}
 
+
 		// ********************************************************
-		// http://www.codewars.com/kata/517abf86da9663f1d2000003/train/csharp
-		// Convert string to camel case
+		// https://www.codewars.com/kata/sort-the-odd/train/csharp
+		// Sort the odd.
 
-
-
+		public static int[] SortArray(int[] array)
+		{
+			var list = new List<int>(array);
+			var oddNumbers = list.Where(x => x % 2 == 1).OrderBy(x => x).ToList();
+			var oddIndex = 0;
+			return list.Select(x => (x % 2 == 1) ? oddNumbers[oddIndex++] : x).ToArray();
+		}
 	}
 }

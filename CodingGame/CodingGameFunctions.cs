@@ -54,5 +54,14 @@ namespace CodingGame
 			var result = s[0] == '1' ? "0" : "00";
 			return result + " " + new string('0', s.Length);
 		}
+
+		// *********************************************************************
+		// https://www.codingame.com/ide/4516290e53ef5388dd057e579513ed7a0d84aa0
+		// Temperatures
+
+		public static int Temperatures(int[] temps)
+		{
+			return temps.ToList().OrderBy(Math.Abs).ThenByDescending(x => x).First();
+		}
 	}
 }
