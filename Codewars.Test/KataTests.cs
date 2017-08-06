@@ -31,7 +31,8 @@ namespace Codewars.Test
 			[Test]
 			public static void EvilShouldWin()
 			{
-				Assert.AreEqual("Battle Result: Evil eradicates all trace of Good", Kata.GoodVsEvil("1 1 1 1 1 1", "1 1 1 1 1 1 1"));
+				Assert.AreEqual("Battle Result: Evil eradicates all trace of Good",
+					Kata.GoodVsEvil("1 1 1 1 1 1", "1 1 1 1 1 1 1"));
 			}
 
 			[Test]
@@ -165,9 +166,10 @@ namespace Codewars.Test
 			[Test]
 			public void Test1()
 			{
-				int[] r = new int[] { 3, 2, 1, 1 };
+				int[] r = new int[] {3, 2, 1, 1};
 				Assert.AreEqual(r, Kata.NumberOfStepsImpl.SqInRect(5, 3));
 			}
+
 			[Test]
 			public void Test3()
 			{
@@ -182,19 +184,19 @@ namespace Codewars.Test
 			[Test]
 			public static void SimpleCase()
 			{
-				Assert.AreEqual(3, Kata.CountingChangeCombinations.CountCombinations(4, new[] { 1, 2 }));
+				Assert.AreEqual(3, Kata.CountingChangeCombinations.CountCombinations(4, new[] {1, 2}));
 			}
 
 			[Test]
 			public static void AnotherSimpleCase()
 			{
-				Assert.AreEqual(4, Kata.CountingChangeCombinations.CountCombinations(10, new[] { 5, 2, 3 }));
+				Assert.AreEqual(4, Kata.CountingChangeCombinations.CountCombinations(10, new[] {5, 2, 3}));
 			}
 
 			[Test]
 			public static void NoChange()
 			{
-				Assert.AreEqual(0, Kata.CountingChangeCombinations.CountCombinations(11, new[] { 5, 7 }));
+				Assert.AreEqual(0, Kata.CountingChangeCombinations.CountCombinations(11, new[] {5, 7}));
 			}
 		}
 
@@ -210,14 +212,14 @@ namespace Codewars.Test
 					Left = new TreeNode
 					{
 						Value = 2,
-						Left = new TreeNode { Value = 1 },
-						Right = new TreeNode { Value = 3 }
+						Left = new TreeNode {Value = 1},
+						Right = new TreeNode {Value = 3}
 					},
 					Right = new TreeNode
 					{
 						Value = 7,
-						Left = new TreeNode { Value = 6 },
-						Right = new TreeNode { Value = 9 }
+						Left = new TreeNode {Value = 6},
+						Right = new TreeNode {Value = 9}
 					}
 				};
 
@@ -227,14 +229,14 @@ namespace Codewars.Test
 					Left = new TreeNode
 					{
 						Value = 7,
-						Left = new TreeNode { Value = 9 },
-						Right = new TreeNode { Value = 6 }
+						Left = new TreeNode {Value = 9},
+						Right = new TreeNode {Value = 6}
 					},
 					Right = new TreeNode
 					{
 						Value = 2,
-						Left = new TreeNode { Value = 3 },
-						Right = new TreeNode { Value = 1 }
+						Left = new TreeNode {Value = 3},
+						Right = new TreeNode {Value = 1}
 					}
 				};
 
@@ -366,43 +368,43 @@ namespace Codewars.Test
 		{
 			private static readonly Tuple<int, string>[] grp1 =
 			{
-				new Tuple<int,string>(2,"tofu"),
-				new Tuple<int,string>(2,"potato"),
-				new Tuple<int,string>(2,"cucumber"),
-				new Tuple<int,string>(2,"cabbage"),
-				new Tuple<int,string>(1,"turnip"),
-				new Tuple<int,string>(1,"pepper"),
-				new Tuple<int,string>(1,"onion"),
-				new Tuple<int,string>(1,"mushroom"),
-				new Tuple<int,string>(1,"celery"),
-				new Tuple<int,string>(1,"carrot")
-			  };
+				new Tuple<int, string>(2, "tofu"),
+				new Tuple<int, string>(2, "potato"),
+				new Tuple<int, string>(2, "cucumber"),
+				new Tuple<int, string>(2, "cabbage"),
+				new Tuple<int, string>(1, "turnip"),
+				new Tuple<int, string>(1, "pepper"),
+				new Tuple<int, string>(1, "onion"),
+				new Tuple<int, string>(1, "mushroom"),
+				new Tuple<int, string>(1, "celery"),
+				new Tuple<int, string>(1, "carrot")
+			};
 
 			private static readonly string str1 =
-			  "potato tofu cucumber cabbage turnip pepper onion carrot celery mushroom potato tofu cucumber cabbage";
+				"potato tofu cucumber cabbage turnip pepper onion carrot celery mushroom potato tofu cucumber cabbage";
 
 			private static readonly Tuple<int, string>[] grp2 =
 			{
-				new Tuple<int,string>(15,"turnip"),
-				new Tuple<int,string>(14,"mushroom"),
-				new Tuple<int,string>(13,"cabbage"),
-				new Tuple<int,string>(10,"carrot"),
-				new Tuple<int,string>(9,"potato"),
-				new Tuple<int,string>(7,"onion"),
-				new Tuple<int,string>(6,"tofu"),
-				new Tuple<int,string>(6,"pepper"),
-				new Tuple<int,string>(5,"cucumber"),
-				new Tuple<int,string>(4,"celery")
-			  };
+				new Tuple<int, string>(15, "turnip"),
+				new Tuple<int, string>(14, "mushroom"),
+				new Tuple<int, string>(13, "cabbage"),
+				new Tuple<int, string>(10, "carrot"),
+				new Tuple<int, string>(9, "potato"),
+				new Tuple<int, string>(7, "onion"),
+				new Tuple<int, string>(6, "tofu"),
+				new Tuple<int, string>(6, "pepper"),
+				new Tuple<int, string>(5, "cucumber"),
+				new Tuple<int, string>(4, "celery")
+			};
 
 			private static readonly string str2 =
-			  "mushroom chopsticks chopsticks turnip mushroom carrot mushroom cabbage mushroom carrot tofu pepper cabbage " +
-			  "potato cucumber mushroom mushroom potato turnip chopsticks cabbage celery celery turnip pepper chopsticks " +
-			  "potato potato onion cabbage cucumber onion pepper onion cabbage potato tofu carrot cabbage cabbage turnip " +
-			  "mushroom cabbage cabbage cucumber cabbage chopsticks turnip pepper onion pepper onion mushroom turnip carrot " +
-			  "carrot tofu onion tofu chopsticks chopsticks chopsticks mushroom cucumber chopsticks carrot potato cabbage cabbage " +
-			  "carrot mushroom chopsticks mushroom celery turnip onion carrot turnip cucumber carrot potato mushroom turnip " +
-			  "mushroom cabbage tofu turnip turnip turnip mushroom tofu potato pepper turnip potato turnip celery carrot turnip";
+				"mushroom chopsticks chopsticks turnip mushroom carrot mushroom cabbage mushroom carrot tofu pepper cabbage " +
+				"potato cucumber mushroom mushroom potato turnip chopsticks cabbage celery celery turnip pepper chopsticks " +
+				"potato potato onion cabbage cucumber onion pepper onion cabbage potato tofu carrot cabbage cabbage turnip " +
+				"mushroom cabbage cabbage cucumber cabbage chopsticks turnip pepper onion pepper onion mushroom turnip carrot " +
+				"carrot tofu onion tofu chopsticks chopsticks chopsticks mushroom cucumber chopsticks carrot potato cabbage cabbage " +
+				"carrot mushroom chopsticks mushroom celery turnip onion carrot turnip cucumber carrot potato mushroom turnip " +
+				"mushroom cabbage tofu turnip turnip turnip mushroom tofu potato pepper turnip potato turnip celery carrot turnip";
 
 			[Test]
 			public void FixedTest1()
@@ -425,7 +427,7 @@ namespace Codewars.Test
 			[Test]
 			public void Test1()
 			{
-				var days = new[] { 15, 20, 20, 15, 10, 30, 45 };
+				var days = new[] {15, 20, 20, 15, 10, 30, 45};
 				var pages = 100;
 				Assert.AreEqual(6, Kata.Book.DayIs(pages, days));
 			}
@@ -433,7 +435,7 @@ namespace Codewars.Test
 			[Test]
 			public void Test2()
 			{
-				var days = new[] { 1, 0, 0, 0, 0, 0, 0 };
+				var days = new[] {1, 0, 0, 0, 0, 0, 0};
 				var pages = 2;
 				Assert.AreEqual(1, Kata.Book.DayIs(pages, days));
 			}
@@ -441,7 +443,7 @@ namespace Codewars.Test
 			[Test]
 			public void Test3()
 			{
-				var days = new[] { 109, 58, 77, 10, 39, 125, 15 };
+				var days = new[] {109, 58, 77, 10, 39, 125, 15};
 				var pages = 433;
 				Assert.AreEqual(7, Kata.Book.DayIs(pages, days));
 			}
@@ -450,7 +452,7 @@ namespace Codewars.Test
 		[TestFixture]
 		public static class ValleyTests
 		{
-			private static void testing(string actual, string expected)
+			private static void Testing(string actual, string expected)
 			{
 				Assert.AreEqual(expected, actual);
 			}
@@ -461,37 +463,57 @@ namespace Codewars.Test
 			}
 
 			[Test]
-			public static void test0()
+			public static void Test0()
 			{
 				Console.WriteLine("Fixed Tests");
-				var a = new [] { 17, 17, 15, 14, 8, 7, 7, 5, 4, 4, 1 };
-				var r = new [] { 17, 15, 8, 7, 4, 1, 4, 5, 7, 14, 17 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 20, 7, 6, 2 }; r = new[] { 20, 6, 2, 7 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new int[] { }; r = new int[] { };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 14, 10, 8 }; r = new[] { 14, 8, 10 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 20, 18, 17, 13, 12, 12, 10, 9, 4, 2, 2, 1, 1 };
-				r = new[] { 20, 17, 12, 10, 4, 2, 1, 1, 2, 9, 12, 13, 18 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 20, 16, 14, 10, 1 }; r = new[] { 20, 14, 1, 10, 16 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 19, 19, 18, 14, 12, 11, 9, 7, 4 };
-				r = new[] { 19, 18, 12, 9, 4, 7, 11, 14, 19 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 20, 18, 16, 15, 14, 14, 13, 13, 10, 9, 4, 4, 4, 1 };
-				r = new[] { 20, 16, 14, 13, 10, 4, 4, 1, 4, 9, 13, 14, 15, 18 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 20, 20, 16, 14, 12, 12, 11, 10, 3, 2 };
-				r = new[] { 20, 16, 12, 11, 3, 2, 10, 12, 14, 20 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 19, 17, 16, 15, 13, 8, 5, 5, 4, 4, 4 };
-				r = new[] { 19, 16, 13, 5, 4, 4, 4, 5, 8, 15, 17 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
-				a = new[] { 19, 8, 6 }; r = new[] { 19, 6, 8 };
-				testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				var a = new[] {17, 17, 15, 14, 8, 7, 7, 5, 4, 4, 1};
+				var r = new[] {17, 15, 8, 7, 4, 1, 4, 5, 7, 14, 17};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {20, 7, 6, 2};
+				r = new[] {20, 6, 2, 7};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new int[] { };
+				r = new int[] { };
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {14, 10, 8};
+				r = new[] {14, 8, 10};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {20, 18, 17, 13, 12, 12, 10, 9, 4, 2, 2, 1, 1};
+				r = new[] {20, 17, 12, 10, 4, 2, 1, 1, 2, 9, 12, 13, 18};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {20, 16, 14, 10, 1};
+				r = new[] {20, 14, 1, 10, 16};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {19, 19, 18, 14, 12, 11, 9, 7, 4};
+				r = new[] {19, 18, 12, 9, 4, 7, 11, 14, 19};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {20, 18, 16, 15, 14, 14, 13, 13, 10, 9, 4, 4, 4, 1};
+				r = new[] {20, 16, 14, 13, 10, 4, 4, 1, 4, 9, 13, 14, 15, 18};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {20, 20, 16, 14, 12, 12, 11, 10, 3, 2};
+				r = new[] {20, 16, 12, 11, 3, 2, 10, 12, 14, 20};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {19, 17, 16, 15, 13, 8, 5, 5, 4, 4, 4};
+				r = new[] {19, 16, 13, 5, 4, 4, 4, 5, 8, 15, 17};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+				a = new[] {19, 8, 6};
+				r = new[] {19, 6, 8};
+				Testing(Array2String(Kata.Valley.MakeValley(a)), Array2String(r));
+			}
+		}
+
+		[TestFixture]
+		public  class RomanConvertTest
+		{
+			[TestCase(1, "I")]
+			[TestCase(2, "II")]
+			[TestCase(3, "III")]
+			[TestCase(4, "IV")]
+			[TestCase(5, "V")]
+			[TestCase(1354, "MCCCLIV")]
+			public void Test(int value, string expected)
+			{
+				Assert.AreEqual(expected, Kata.RomanConvert.Solution(value));
 			}
 		}
 	}

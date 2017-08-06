@@ -541,5 +541,55 @@ namespace Codewars
 				return leftList.ToArray();
 			}
 		}
+
+		// ********************************************************
+		// https://www.codewars.com/kata/roman-numerals-encoder/train/csharp
+		// Roman Numerals Encoder
+
+
+		public class RomanConvert
+		{
+			// I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1,000
+
+			public static string Solution(int n)
+			{
+				var digits = GetDigits(n);
+				var single = Convert(digits[0], "I", "V", "X");
+				if (digits.Length == 1) return single;
+				var ten = Convert(digits[1], "X", "L", "C");
+				if (digits.Length == 2) return ten + single;
+				var hundred = Convert(digits[2], "C", "D", "M");
+				if (digits.Length == 3) return hundred + ten + single;
+				var thousand = string.Join("", Enumerable.Repeat("M", digits[3]));
+				return thousand + hundred + ten + single;
+			}
+
+			private static int[] GetDigits(int n)
+			{
+				return n.ToString()
+					.Select(x => int.Parse(x.ToString()))
+					.Reverse()
+					.ToArray();
+			}
+
+			private static string Convert(int n, string low, string middle, string high)
+			{
+				switch (n)
+				{
+					case 0: return "";
+					case 1: return low;
+					case 2: return low + low;
+					case 3: return low + low + low;
+					case 4: return low + middle;
+					case 5: return middle;
+					case 6: return middle + low;
+					case 7: return middle + low + low;
+					case 8: return middle + low + low + low;
+					case 9: return low + high;
+					default:
+						throw new Exception($"Illegal number {n}");
+				}
+			}
+		}
 	}
 }
