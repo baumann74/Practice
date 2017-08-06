@@ -516,5 +516,40 @@ namespace Codewars.Test
 				Assert.AreEqual(expected, Kata.RomanConvert.Solution(value));
 			}
 		}
+
+		[TestFixture]
+		public static class ScrambliesTests
+		{
+			private static void testing(bool actual, bool expected)
+			{
+				Assert.AreEqual(expected, actual);
+			}
+
+			[Test]
+			public static void test1()
+			{
+				testing(Kata.Scramblies.Scramble("rkqodlw", "world"), true);
+				testing(Kata.Scramblies.Scramble("cedewaraaossoqqyt", "codewars"), true);
+				testing(Kata.Scramblies.Scramble("katas", "steak"), false);
+				testing(Kata.Scramblies.Scramble("scriptjavx", "javascript"), false);
+				testing(Kata.Scramblies.Scramble("scriptingjava", "javascript"), true);
+				testing(Kata.Scramblies.Scramble("scriptsjava", "javascripts"), true);
+				testing(Kata.Scramblies.Scramble("javscripts", "javascript"), false);
+				testing(Kata.Scramblies.Scramble("aabbcamaomsccdd", "commas"), true);
+				testing(Kata.Scramblies.Scramble("commas", "commas"), true);
+				testing(Kata.Scramblies.Scramble("sammoc", "commas"), true);
+			}
+		}
+
+		[TestFixture]
+		public class WeightSortTests
+		{
+			[Test]
+			public void Test1()
+			{
+				Assert.AreEqual("2000 103 123 4444 99", Kata.WeightSort.orderWeight("103 123 4444 99 2000"));
+				Assert.AreEqual("11 11 2000 10003 22 123 1234000 44444444 9999", Kata.WeightSort.orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"));
+			}
+		}
 	}
 }

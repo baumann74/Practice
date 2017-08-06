@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66C28D3D-2C17-413A-8DC4-6F47E31AE8DB}</ProjectGuid>
+    <ProjectGuid>{108A20CB-D378-4B2E-83C5-E2B12249F804}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LeetCode</RootNamespace>
-    <AssemblyName>LeetCode</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>CodingGame</RootNamespace>
+    <AssemblyName>CodingGame</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,23 +36,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDigitsSolver.cs" />
-    <Compile Include="CourseSchedule.cs" />
-    <Compile Include="LowestCommonAncestorSolver.cs" />
-    <Compile Include="MaximalSquareSolver.cs" />
-    <Compile Include="MaximumDepthOfBinaryTree.cs" />
-    <Compile Include="SingleNumberSolution.cs" />
-    <Compile Include="SymmetricTree.cs" />
-    <Compile Include="TreeNode.cs" />
-    <Compile Include="ValidateBinarySearchTree.cs" />
-    <Compile Include="ZigZagConversion.cs" />
+    <Compile Include="CodingGameFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

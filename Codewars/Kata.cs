@@ -543,6 +543,103 @@ namespace Codewars
 		}
 
 		// ********************************************************
+		// http://www.codewars.com/kata/55c04b4cc56a697bb0000048/train/csharp
+		// Scramblies
+
+
+		public class Scramblies
+		{
+			public static bool Scramble(string str1, string str2)
+			{
+				if (str1.Length < str2.Length) return false;
+				var dict = new Dictionary<char, int>();
+				str1.ToList().ForEach(x =>
+				{
+					if (dict.ContainsKey(x))
+					{
+						dict[x]++;
+					}
+					else
+					{
+						dict[x] = 1;
+					}
+				});
+				foreach (var t in str2)
+				{
+					if (dict.ContainsKey(t) && dict[t] > 0)
+					{
+						dict[t] = dict[t] - 1;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+
+			// Clever solution
+			// return str2.All(x=>str1.Count(y=>y==x)>=str2.Count(y=>y==x));
+		}
+
+		// ********************************************************
+		// http://www.codewars.com/kata/55c6126177c9441a570000cc
+		// Weight for weight
+
+		public class WeightSort
+		{
+			public static string orderWeight(string strng)
+			{
+				var list = strng.Split(' ').Select(x => new Weight { Value = x }).ToList();
+				list.Sort();
+				return string.Join(" ", list.Select(x => x.Value));
+			}
+
+			private class Weight : IComparable
+			{
+				public string Value { get; set; }
+
+				public int CompareTo(object obj)
+				{
+					var other = (Weight)obj;
+					var weight = GetWeight();
+					var otherWeight = other.GetWeight();
+					if (otherWeight == weight)
+					{
+						return string.Compare(Value, other.Value, StringComparison.Ordinal);
+					}
+					return (weight > otherWeight) ? 1 : -1;
+				}
+
+				private int GetWeight()
+				{
+					return Value.ToList().Sum(x => int.Parse(x.ToString()));
+				}
+			}
+
+			// Cleaver solution
+			/*
+			 return string.Join(" ", 
+				s.Split(' ')
+				.OrderBy(n => n.ToCharArray().Select(c => (int)char.GetNumericValue(c)).Sum())
+				.ThenBy(n => n));
+			*/
+		}
+
+
+		// ********************************************************
+		// https://www.codewars.com/kata/sort-the-odd/train/csharp
+		// Sort the odd.
+
+		public static int[] SortArray(int[] array)
+		{
+			var list = new List<int>(array);
+			var oddNumbers = list.Where(x => x % 2 == 1).OrderBy(x => x).ToList();
+			var oddIndex = 0;
+			return list.Select(x => (x % 2 == 1) ? oddNumbers[oddIndex++] : x).ToArray();
+		}
+
+		// ********************************************************
 		// https://www.codewars.com/kata/roman-numerals-encoder/train/csharp
 		// Roman Numerals Encoder
 
