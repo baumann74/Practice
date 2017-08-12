@@ -4,12 +4,12 @@
 	{
 		public static string Song()
 		{
-			var defaultVerses = "";
+			var result = "";
 			for (var n = 99; n >= 3; n--)
 			{
-				defaultVerses = defaultVerses + Verse(n);
+				result = result + Verse(n);
 			}
-			return defaultVerses + Verse2() + Verse1() + VerseEmpty();
+			return result + Verse2() + Verse1() + VerseEmpty();
 		}
 
 		public static string Verse(int n)
@@ -22,7 +22,6 @@
 		{
 			return "2 bottles of beer on the wall, 2 bottles of beer.\r\nTake one down and pass it around, 1 bottle of beer on the wall.\r\n\r\n";
 		}
-
 
 		private static string Verse1()
 		{
