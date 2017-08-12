@@ -11,8 +11,7 @@ namespace KatasTest
 		public void FirstVerse()
 		{
 			// Arrange
-			const string expected = @"99 bottles of beer on the wall, 99 bottles of beer.
-Take one down and pass it around, 98 bottles of beer on the wall.";
+			const string expected = "99 bottles of beer on the wall, 99 bottles of beer.\r\nTake one down and pass it around, 98 bottles of beer on the wall.\r\n\r\n";
 
 			// Act + assert.
 			BottlesSong.Verse(99).Should().Be(expected);
@@ -22,8 +21,7 @@ Take one down and pass it around, 98 bottles of beer on the wall.";
 		public void AnotherVerse()
 		{
 			// Arrange
-			const string expected = @"89 bottles of beer on the wall, 89 bottles of beer.
-Take one down and pass it around, 88 bottles of beer on the wall.";
+			const string expected = "89 bottles of beer on the wall, 89 bottles of beer.\r\nTake one down and pass it around, 88 bottles of beer on the wall.\r\n\r\n";
 
 			// Act + assert.
 			BottlesSong.Verse(89).Should().Be(expected);
